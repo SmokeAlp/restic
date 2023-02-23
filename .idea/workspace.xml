@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba9ee488-266d-4b70-8e51-664952844006" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/DataLogicLair/Models/good_input_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataLogicLair/Models/order_input_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataLogicLair/goods_products_repository.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataLogicLair/goods_repository.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataLogicLair/orders_repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataLogicLair/Models/product_input_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataLogicLair/Models/product_input_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataLogicLair/mysql_connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataLogicLair/get_conection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataLogicLair/options.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataLogicLair/options.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataLogicLair/product_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataLogicLair/products_repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sql_connection.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

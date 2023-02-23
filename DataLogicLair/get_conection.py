@@ -1,13 +1,13 @@
-import mysql.connector
 import pyodbc
 from mysql.connector import *
-from restic.DataLogicLair.`
+from DataLogicLair.options import *
 
 
 def get_connection():
     connection = None
+    conString = Options()
     try:
-        connection = mysql.connector.connect()
+        connection = pyodbc.connect(conString.connection_string)
         print("MySQL Database connection successful...")
     except Error as err:
         print(f"Error: '{err}'")

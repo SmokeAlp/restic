@@ -1,6 +1,6 @@
 class Product:
-    def __init__(self, name, amount, c_p_a, ut_of_mesment):
+    def __init__(self, name, amount, cost_per_amount, unit_of_measurement):
         self.name = name
         self.amount = amount
-        self.cost_per_amount = c_p_a
-        self.unit_of_measurement = ut_of_mesment
+        self.cost_per_amount = cost_per_amount
+        self.unit_of_measurement = unit_of_measurement

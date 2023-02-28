@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba9ee488-266d-4b70-8e51-664952844006" name="Changes" comment="" />
+    <list default="true" id="ba9ee488-266d-4b70-8e51-664952844006" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/DataLogicLair/Models/customer_input_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataLogicLair/customer_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataLogicLair/Models/order_input_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataLogicLair/Models/order_input_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataLogicLair/get_conection.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataLogicLair/get_conection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataLogicLair/goods_products_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataLogicLair/goods_products_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataLogicLair/goods_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataLogicLair/goods_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataLogicLair/options.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataLogicLair/options.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataLogicLair/orders_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataLogicLair/orders_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataLogicLair/products_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataLogicLair/products_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +32,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="c5631205-177f-41aa-bd3d-de28cb7bc21d" />
+        <option name="url" value="https://github.com/SmokeAlp/restic.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

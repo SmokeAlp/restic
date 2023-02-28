@@ -1,6 +1,6 @@
 import pyodbc
-from mysql.connector import *
 from DataLogicLair.options import *
+from pyodbc import Error
 
 
 def get_connection():

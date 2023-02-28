@@ -1,26 +1,27 @@
 from DataLogicLair.get_conection import *
+from DataLogicLair.options import *
 from pyodbc import Error
 
 
-class Goods_repository:
+class Customer_repository:
     def __init__(self):
-        self.__options = Options()
+        self.__options =Options()
 
-    def create_good(self, good):
+    def create_customer(self, customer):
         try:
             cnc = get_connection()
             cursor = cnc.cursor()
-            query = self.__options.create_good + f" '{good.name}', {good.cost}"
+            query = self.__options.create_customer + f" {customer.name}"
             cursor.execute(query)
             cnc.commit()
             cnc.close()
-            print('good have been added successfully')
+            print('create_customer completed successfully')
         except Error as err:
-            print(f'create_good_error: {err}')
+            print(f'create_customer_error: {err}')
 
-    def get_all_goods(self):
+    def get_all_customer(self):
         cnc = get_connection()
         cursor = cnc.cursor()
-        query = self.__options.get_all_goods
+        query = self.__options.get_all_customer
         cursor.execute(query)
         return cursor.fetchall()

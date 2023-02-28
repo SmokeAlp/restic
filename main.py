@@ -5,6 +5,9 @@ from DataLogicLair.goods_products_repository import *
 from DataLogicLair.Models.product_input_model import *
 from DataLogicLair.Models.good_input_model import *
 from DataLogicLair.Models.order_input_model import *
+from DataLogicLair.Models.customer_input_model import *
+from DataLogicLair.customer_repository import *
+
 
 
 
@@ -61,18 +64,53 @@ from DataLogicLair.Models.order_input_model import *
 # print(q[0])
 
 
-
+# opt = Options()
 
 #CREATE AND GET ORDER
 order = Order_repository()
-order.create_order('Chel_2', 9, 'Capucino', 1)
+order_model = Order(1, 'Capucino', 1)
+
+order.create_order(order_model)
+
+# customer = Customer_repository()
+# cnc = get_connection()
+# cursor = cnc.cursor()
+# # cursor.execute(opt.get_good_id_by_name + f" {order_model.good_name}")
+# # good_id = cursor.fetchval()
+# # print(good_id)
+# # cursor.execute(
+# #     opt.get_last_order_id
+# # )
+# # ord_id = cursor.fetchval()
+# # print(ord_id)
+# # query = opt.create_goods_orders + f" {good_id}, {ord_id}, {order_model.good_amount}"
+# # cursor.execute(query)
+# # cnc.commit()
+# # cursor.execute(opt.get_products_amount_and_id_by_order_id + f" {ord_id}")
+# # products_id_and_amount = cursor.fetchall()
+# # print(products_id_and_amount)
+# # for i in products_id_and_amount:
+# #     print(i.product_id, i.product_amount)
+# #     cursor.execute(opt.update_product_amount + f" {i.product_id}, -{i.product_amount}")
+# #     cnc.commit()
+# cursor.execute(opt.update_customer_summ_money + f" {order_model.customer_id}")
+# cnc.commit()
+# res = customer.get_all_customer()
+# for i in res:
+#     print(i)
 
 res_o = order.get_all_orders()
 
 for i in res_o:
     print(i)
 
-
+# cust = Customer_repository()
+# cust_model = Customer('QWEQWE')
+#
+# cust.create_customer(cust_model)
+# res = cust.get_all_customer()
+# for i in res:
+#     print(i)
 
 
 

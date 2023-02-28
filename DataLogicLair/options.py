@@ -13,10 +13,16 @@ class Options:
         self.get_good_id_by_name = 'exec getGoodIdByName'
         #ORDERS
         self.get_all_orders = 'exec getAllOrders'
+        self.get_last_order_id = 'exec getLastOrderId'
         self.create_order = 'exec createOrders'
-        self.update_order_price_by_id = 'exec updateOrderPriceById'
         self.check_availability_of_customer = 'exec checkAvailabilityOfCustomer'
         self.get_products_amount_and_id_by_order_id = 'exec getProductsAmountAndIdByOrderId'
+        #CUSTOMERS
+        self.create_customer = 'exec createCustomers'
+        self.get_all_customer = 'exec getAllCustomers'
+        self.update_customer_summ_money = 'exec updateCustomerSummMoney'
+        #CUSTOMERS_ORDERS
+        self.create_customers_orders = 'exec createCustomersOrders'
         #GOODS_PRODUCTS
         self.create_goods_products = 'exec createGoodsProducts'
         self.get_all_goods_products = 'exec getAllGoodsProducts'

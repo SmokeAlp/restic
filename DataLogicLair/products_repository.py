@@ -1,5 +1,5 @@
 from DataLogicLair.get_conection import *
-from mysql.connector import Error
+from pyodbc import Error
 
 
 class Product_repository:

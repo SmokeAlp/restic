@@ -1,18 +1,19 @@
 from DataLogicLair.products_repository import *
 from DataLogicLair.goods_repository import *
+from DataLogicLair.orders_repository import *
+from DataLogicLair.goods_products_repository import *
 from DataLogicLair.Models.product_input_model import *
 from DataLogicLair.Models.good_input_model import *
 from DataLogicLair.Models.order_input_model import *
-from DataLogicLair.orders_repository import *
-from DataLogicLair.goods_products_repository import *
 
 
 
-#CREATE AND GET PRODUCT
+#CREATE AND GET AND ADD PRODUCT
 # product = Product_repository()
 # product_model = Product('cake', 1200, 45, 'shtuka')
 # product.create_product(product_model)
 #
+# product.add_product('Apple', 10)
 # res = product.get_all_products()
 #
 # for i in res:
@@ -28,20 +29,8 @@ from DataLogicLair.goods_products_repository import *
 # for i in res:
 #     print(i)
 
-#CREATE AND GET ORDER
-# order = Order_repository()
-# # order_model = Order('Chel', 450, 3)
-# # order.create_order(order_model)
-#
-# res = order.get_all_orders()
-#
-# for i in res:
-#     if i.customer_name == 'Chel':
-#         r = i.customer_name
-#         print(r)
 
-
-#1 METHOD HOW TO CREATE AND GET GOODS_PRODUCTS
+#CREATE AND GET GOODS_PRODUCTS
 # good_product = Goods_products_repository()
 # good_product.create_goods_products('coffee beans', 'Capucino', 1)
 #
@@ -49,6 +38,16 @@ from DataLogicLair.goods_products_repository import *
 #
 # for i in res_g_p:
 #     print(i)
+
+
+# opt = Options()
+# cnc = get_connection()
+# cursor = cnc.cursor()
+# product = 'coffee beans'
+# good = 'Capucino'
+# product_id_and_good_id_by_name = cursor.execute(opt.get_product_id_and_good_id_by_name + f" '{product}', {good}")
+# print(product_id_and_good_id_by_name.fetchval()[1])
+# print(product_id_and_good_id_by_name.fetchone())
 
 
 # product = 'milk'
@@ -61,11 +60,37 @@ from DataLogicLair.goods_products_repository import *
 # q = k[0]
 # print(q[0])
 
-#2 METHOD HOW TO CREATE AND GET GOODS_PRODUCTS
-# good_product = Goods_products_repository()
-# good_product.create_goods_products('cream', 'Capucino', 1)
-#
-# res_g_p = good_product.get_all_goods_products()
-#
-# for i in res_g_p:
-#     print(i)
+
+
+
+#CREATE AND GET ORDER
+order = Order_repository()
+order.create_order('Chel_2', 9, 'Capucino', 1)
+
+res_o = order.get_all_orders()
+
+for i in res_o:
+    print(i)
+
+
+
+
+
+
+# good_name = 'Capucino'
+# opt = Options()
+# cnc = get_connection()
+# cursor = cnc.cursor()
+# products_id_and_amount = cursor.execute(opt.get_products_amount_and_id_by_order_id + f" 8")
+# for i in products_id_and_amount.fetchall():
+#     print(i.product_id, i.product_amount)
+#     cursor.execute(opt.update_product_amount + f" {i.product_id}, -{i.product_amount}")
+#     cnc.commit()
+# cnc.commit()
+# good_id = cursor.execute(opt.get_good_id_by_name + f" {good_name}")
+# print(good_id.fetchval())
+
+
+
+
+

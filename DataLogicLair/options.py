@@ -6,6 +6,7 @@ class Options:
         self.update_product_amount = 'exec updateProductAmount'
         self.get_all_products = 'exec getAllProducts'
         self.get_product_id_by_name = 'exec getProductIdByName'
+        self.check_summ_of_money_for_product_amount = 'exec checkSummOfMoneyForProductAmount'
         #GOODS
         self.get_all_goods = 'exec getAllGoods'
         self.create_good = 'exec createGoods'
@@ -13,11 +14,12 @@ class Options:
         #ORDERS
         self.get_all_orders = 'exec getAllOrders'
         self.create_order = 'exec createOrders'
+        self.update_order_price_by_id = 'exec updateOrderPriceById'
+        self.check_availability_of_customer = 'exec checkAvailabilityOfCustomer'
+        self.get_products_amount_and_id_by_order_id = 'exec getProductsAmountAndIdByOrderId'
         #GOODS_PRODUCTS
         self.create_goods_products = 'exec createGoodsProducts'
         self.get_all_goods_products = 'exec getAllGoodsProducts'
         self.get_product_id_and_good_id_by_name = 'exec getProductIdAndGoodIdByName'
-        #GOODS_ORDERS (пока не задействуется)
-        self.create_goods_orders = 'exec create_Goods_Orders'
-
-
+        #GOODS_ORDERS
+        self.create_goods_orders = 'exec createGoodsOrder'

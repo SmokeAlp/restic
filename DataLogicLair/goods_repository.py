@@ -1,6 +1,7 @@
 from DataLogicLair.get_conection import *
 from mysql.connector import Error
 
+
 class Goods_repository:
     def __init__(self):
         self.__options = Options()

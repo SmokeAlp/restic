@@ -1,6 +1,5 @@
 from DataLogicLair.get_conection import *
 from pyodbc import Error
-from DataLogicLair.goods_orders_repository import *
 
 
 class Order_repository:

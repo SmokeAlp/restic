@@ -98,11 +98,12 @@ order.create_order(order_model)
 # res = customer.get_all_customer()
 # for i in res:
 #     print(i)
+if __name__ == '__main__':
 
-res_o = order.get_all_orders()
+    res_o = order.get_all_orders()
 
-for i in res_o:
-    print(i)
+    for i in res_o:
+        print(i)
 
 # cust = Customer_repository()
 # cust_model = Customer('QWEQWE')

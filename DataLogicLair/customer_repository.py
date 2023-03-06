@@ -5,7 +5,7 @@ from pyodbc import Error
 
 class Customer_repository:
     def __init__(self):
-        self.__options =Options()
+        self.__options = Options()
 
     def create_customer(self, customer):
         try:

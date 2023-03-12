@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba9ee488-266d-4b70-8e51-664952844006" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/DataLogicLair/Models/good_model_for_order.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataLogicLair/Models/product_model_for_order.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/restic.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/restic.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataLogicLair/Models/order_input_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataLogicLair/Models/order_input_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataLogicLair/options.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataLogicLair/options.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataLogicLair/orders_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataLogicLair/orders_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +55,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/megub/programming/PythonProjects/restik/restic&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/esken/OneDrive/Рабочий стол/repo&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>

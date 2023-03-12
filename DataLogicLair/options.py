@@ -7,6 +7,10 @@ class Options:
         self.get_all_products = 'exec getAllProducts'
         self.get_product_id_by_name = 'exec getProductIdByName'
         self.check_summ_of_money_for_product_amount = 'exec checkSummOfMoneyForProductAmount'
+        self.get_product_amount_by_id = 'exec getProductAmountById'
+        self.get_product_name_by_id = 'exec getProductNameById'
+        self.get_products_amount_and_id_by_order_id = 'exec getProductsAmountAndIdByOrderId'
+        self.get_needed_products_amount_and_id_for_good_by_good_id = "exec getNeededProductsAmountAndIdForGoodByGoodId"
         #GOODS
         self.get_all_goods = 'exec getAllGoods'
         self.create_good = 'exec createGoods'
@@ -16,10 +20,10 @@ class Options:
         self.get_last_order_id = 'exec getLastOrderId'
         self.create_order = 'exec createOrders'
         self.check_availability_of_customer = 'exec checkAvailabilityOfCustomer'
-        self.get_products_amount_and_id_by_order_id = 'exec getProductsAmountAndIdByOrderId'
         #CUSTOMERS
         self.create_customer = 'exec createCustomers'
         self.get_all_customer = 'exec getAllCustomers'
+        self.get_all_customers_name = 'exec getAllCustomersName'
         self.update_customer_summ_money = 'exec updateCustomerSummMoney'
         #CUSTOMERS_ORDERS
         self.create_customers_orders = 'exec createCustomersOrders'

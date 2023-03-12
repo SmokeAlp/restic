@@ -1,5 +1,6 @@
 class Order:
-    def __init__(self, customer_id, good_name, good_amount):
-        self.customer_id = customer_id
-        self.good_name = good_name
-        self.good_amount = good_amount
+    def __init__(self, customer_name = str, goods_list = list):
+        self.order = {
+            "customer_name": customer_name,
+            "goods": goods_list
+        }

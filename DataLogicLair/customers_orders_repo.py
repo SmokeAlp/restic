@@ -1,17 +1,18 @@
 from DataLogicLair.get_conection import *
 from pyodbc import Error
 
-class Goods_orders_repository:
+
+class Customers_orders_repository:
 
     def __init__(self):
         self.__options = Options()
 
-    def create_goods_orders(self, good_name, order_id, amount):
+    def create_goods_orders(self, customer_name, order_id):
         try:
             cnc = get_connection()
             cursor = cnc.cursor()
-            good_id = cursor.execute(self.__options.get_good_id_by_name + f" {good_name}")
-            query = self.__options.create_goods_orders + f" {good_id.fetchval()}, {order_id}, {amount} "
+            cursor.execute(self.__options.get_cu)
+            query = self.__options.create_goods_orders + f" {}, {order_id}"
             cursor.execute(query)
             cnc.commit()
             cnc.close()

@@ -1,5 +1,7 @@
 from DataLogicLair.get_conection import *
 from DataLogicLair.options import *
+
+
 class Good_for_order:
     def __init__(self, name, amount):
         self.name = name
@@ -7,6 +9,7 @@ class Good_for_order:
         self.__options = Options()
         self.cnc = get_connection()
         self.__cursor = self.cnc.cursor()
+        self.products_for_this_good = []
 
     def get_good_id_by_name(self):
         self.__cursor.execute(self.__options.get_good_id_by_name + f" {self.name}")

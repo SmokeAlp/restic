@@ -15,3 +15,5 @@ class Capucino(Good_for_order):
         self.coffe_beans = Coffe_Beans(1)
         self.products_for_this_good = [self.milk, self.cream, self.sugar, self.coffe_beans]
 
+    def get_products_odjcts_list_for_this_good(self):
+        super().__options

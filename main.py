@@ -129,8 +129,9 @@ from DataLogicLair.customer_repository import *
 
 
 options = Options()
-good_for_order_1 = Capucino(3)
-goods = [good_for_order_1]
+good_for_order_1 = Good_for_order('Capucino', 1)
+good_for_order_2 = Good_for_order("Salad", 3)
+goods = [good_for_order_1, good_for_order_2]
 
 cnc = get_connection()
 cursor = cnc.cursor()
@@ -178,53 +179,55 @@ else:
 #         pramlist.append(rna)
 #     if pramlist != []:
 #         for j in pramlist:
-
+glist1 = []
+for i in order.get('goods'):
+    for k in range(i.amount):
+        glist1.append(i.get_needed_products_amount_and_id_for_good_by_good_id())
+print(glist1)
 glsit2 = []
-praalistglav = {}
-
-for i in order.get("goods"):
+for i in glist1:
     bebra = 1
-    for k in i.products_for_this_good:
-        # print(k.id, k.amount_for_good)
-        rna = k.amount_for_good * i.amount
-        # print(rna)
-        # print(k.amount_in_sklad)
-        if rna > k.amount_in_sklad:
+    for k in i:
+        # print(k)
+        rna = k.product_amount
+        if rna > k.amount:
             bebra = 0
             break
     if bebra == 1:
         glsit2.append(i)
-
-if glsit2 == order.get("goods"):
-    for i in glsit2:
-        query = options.create_order
-        cursor.execute(query)
-        cnc.commit()
-        cursor.execute(options.get_last_order_id)
-        order_id = cursor.fetchval()
-        query = options.create_customers_orders + f" {order_id}, {order.customer_id}"
-        cursor.execute(query)
-        cnc.commit()
-        cursor.execute(self.__options.get_good_id_by_name + f" {order.good_name}")
-        good_id = cursor.fetchval()
-        query = self.__options.create_goods_orders + f" {good_id}, {order_id}, {order.good_amount}"
-        cursor.execute(query)
-        cnc.commit()
-        cursor.execute(self.__options.get_products_amount_and_id_by_order_id + f" {order_id}")
-        products_id_and_amount = cursor.fetchall()
-        for i in products_id_and_amount:
-            cursor.execute(self.__options.get_product_amount + f" {i.product_id}")
-            pr_am_in_stock = cursor.fetchval()
-            cursor.execute(self.__options.get_product_name_by_id + f' {i.product_id}')
-            pr_name = cursor.fetchval()
-            if pr_am_in_stock < i.product_amount:
-                print(f'не хватает {pr_name}, нужно больше денег денег денег денег денег для {pr_name}')
-                return False
-        for i in products_id_and_amount:
-            print(i.product_id, i.product_amount)
-            cursor.execute(self.__options.update_product_amount + f" {i.product_id}, -{i.product_amount}")
-            cnc.commit()
-        cursor.execute(self.__options.update_customer_summ_money + f" {order.customer_id}")
-        cnc.commit()
-        cnc.close()
-        print('order have been added successfully, products_amount have been update successfuly, earned money have been update successfuly')
+print(len(glsit2))
+# for i in order.get('goods'):
+#     print(i.name, i.amount)
+# if glsit2 == order.get("goods"):
+#     for i in glsit2:
+#         query = options.create_order
+#         cursor.execute(query)
+#         cnc.commit()
+#         cursor.execute(options.get_last_order_id)
+#         order_id = cursor.fetchval()
+#         query = options.create_customers_orders + f" {order_id}, {order.customer_id}"
+#         cursor.execute(query)
+#         cnc.commit()
+#         cursor.execute(self.__options.get_good_id_by_name + f" {order.good_name}")
+#         good_id = cursor.fetchval()
+#         query = self.__options.create_goods_orders + f" {good_id}, {order_id}, {order.good_amount}"
+#         cursor.execute(query)
+#         cnc.commit()
+#         cursor.execute(self.__options.get_products_amount_and_id_by_order_id + f" {order_id}")
+#         products_id_and_amount = cursor.fetchall()
+#         for i in products_id_and_amount:
+#             cursor.execute(self.__options.get_product_amount + f" {i.product_id}")
+#             pr_am_in_stock = cursor.fetchval()
+#             cursor.execute(self.__options.get_product_name_by_id + f' {i.product_id}')
+#             pr_name = cursor.fetchval()
+#             if pr_am_in_stock < i.product_amount:
+#                 print(f'не хватает {pr_name}, нужно больше денег денег денег денег денег для {pr_name}')
+#                 return False
+#         for i in products_id_and_amount:
+#             print(i.product_id, i.product_amount)
+#             cursor.execute(self.__options.update_product_amount + f" {i.product_id}, -{i.product_amount}")
+#             cnc.commit()
+#         cursor.execute(self.__options.update_customer_summ_money + f" {order.customer_id}")
+#         cnc.commit()
+#         cnc.close()
+#         print('order have been added successfully, products_amount have been update successfuly, earned money have been update successfuly')

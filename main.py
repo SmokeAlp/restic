@@ -184,18 +184,19 @@ for i in order.get('goods'):
     for k in range(i.amount):
         glist1.append(i.get_needed_products_amount_and_id_for_good_by_good_id())
 print(glist1)
-glsit2 = []
+haventGoodds = []
 for i in glist1:
-    bebra = 1
     for k in i:
-        # print(k)
         rna = k.product_amount
         if rna > k.amount:
-            bebra = 0
-            break
-    if bebra == 1:
-        glsit2.append(i)
-print(len(glsit2))
+            haventGoodds.append(i.id)
+        else:
+            k.product_amount -= rna
+if len(haventGoodds) > 0:
+    print(haventGoodds)
+    print("bebebe")
+
+
 # for i in order.get('goods'):
 #     print(i.name, i.amount)
 # if glsit2 == order.get("goods"):

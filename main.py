@@ -6,12 +6,12 @@ from DataLogicLair.Models.product_input_model import *
 from DataLogicLair.Models.good_input_model import *
 from DataLogicLair.Models.order_input_model import *
 from DataLogicLair.Models.customer_input_model import *
+from DataLogicLair.Models.good_model_for_order import *
+from DataLogicLair.Models.Capucino import *
 from DataLogicLair.customer_repository import *
 
 
-
-
-#CREATE AND GET AND ADD PRODUCT
+# CREATE AND GET AND ADD PRODUCT
 # product = Product_repository()
 # product_model = Product('cake', 1200, 45, 'shtuka')
 # product.create_product(product_model)
@@ -22,7 +22,7 @@ from DataLogicLair.customer_repository import *
 # for i in res:
 #     print(i)
 
-#CREATE AND GET GOOD
+# CREATE AND GET GOOD
 # good = Goods_repository()
 # good_model = Good('Capucino', 125)
 # good.create_good(good_model)
@@ -33,7 +33,7 @@ from DataLogicLair.customer_repository import *
 #     print(i)
 
 
-#CREATE AND GET GOODS_PRODUCTS
+# CREATE AND GET GOODS_PRODUCTS
 # good_product = Goods_products_repository()
 # good_product.create_goods_products('coffee beans', 'Capucino', 1)
 #
@@ -66,11 +66,11 @@ from DataLogicLair.customer_repository import *
 
 # opt = Options()
 
-#CREATE AND GET ORDER
-order = Order_repository()
-order_model = Order(1, 'Capucino', 1)
-
-order.create_order(order_model)
+# CREATE AND GET ORDER
+# order = Order_repository()
+# order_model = Order(1, 'Capucino', 1)
+#
+# order.create_order(order_model)
 
 # customer = Customer_repository()
 # cnc = get_connection()
@@ -98,12 +98,12 @@ order.create_order(order_model)
 # res = customer.get_all_customer()
 # for i in res:
 #     print(i)
-if __name__ == '__main__':
-
-    res_o = order.get_all_orders()
-
-    for i in res_o:
-        print(i)
+# if __name__ == '__main__':
+#
+#     res_o = order.get_all_orders()
+#
+#     for i in res_o:
+#         print(i)
 
 # cust = Customer_repository()
 # cust_model = Customer('QWEQWE')
@@ -112,8 +112,6 @@ if __name__ == '__main__':
 # res = cust.get_all_customer()
 # for i in res:
 #     print(i)
-
-
 
 
 # good_name = 'Capucino'
@@ -130,6 +128,107 @@ if __name__ == '__main__':
 # print(good_id.fetchval())
 
 
+options = Options()
+good_for_order_1 = Good_for_order('Capucino', 1)
+good_for_order_2 = Good_for_order("Salad", 3)
+goods = [good_for_order_1, good_for_order_2]
+
+cnc = get_connection()
+cursor = cnc.cursor()
+order = {
+    "cust_name": "Bebra",
+    "goods": goods
+}
+cursor.execute(options.get_all_customers_name)
+cust_names = cursor.fetchall()
+c_n = []
+for x in cust_names:
+    c_n += x
+print(c_n)
+if order.get("cust_name") in c_n:
+    print("OK vse")
+else:
+    cursor.execute(options.create_customer + f" {order.get('cust_name')}")
+    cnc.commit()
+    cursor.execute(options.get_all_customer)
+    c = cursor.fetchall()
+    print(c)
 
 
+# print(good_for_order_1.get_good_id_by_name())
+# print(good_for_order_1.get_needed_products_amount_and_id_for_good_by_good_id())
 
+
+# glsit2 = {}
+# praalistglav = {}
+# # {name: capcino, amount: 1}
+# for i in order.get("goods"):
+#     npr = i.get_needed_products_amount_and_id_for_good_by_good_id()
+#     pramlist = []
+#     for k in npr:
+#         print(k.id, k.product_amount)
+#         cursor.execute(options.get_product_amount_by_id + f" {k.id}")
+#         spram = cursor.fetchval()
+#         print(spram)
+#         rna = k.product_amount * i.amount
+#         print(rna)
+#         if rna > spram:
+#             pramlist.clear()
+#             break
+#         pramlist.append(k.id)
+#         pramlist.append(rna)
+#     if pramlist != []:
+#         for j in pramlist:
+glist1 = []
+for i in order.get('goods'):
+    for k in range(i.amount):
+        glist1.append(i.get_needed_products_amount_and_id_for_good_by_good_id())
+print(glist1)
+haventGoodds = []
+for i in glist1:
+    for k in i:
+        rna = k.product_amount
+        if rna > k.amount:
+            haventGoodds.append(i.id)
+        else:
+            k.product_amount -= rna
+if len(haventGoodds) > 0:
+    print(haventGoodds)
+    print("bebebe")
+
+
+# for i in order.get('goods'):
+#     print(i.name, i.amount)
+# if glsit2 == order.get("goods"):
+#     for i in glsit2:
+#         query = options.create_order
+#         cursor.execute(query)
+#         cnc.commit()
+#         cursor.execute(options.get_last_order_id)
+#         order_id = cursor.fetchval()
+#         query = options.create_customers_orders + f" {order_id}, {order.customer_id}"
+#         cursor.execute(query)
+#         cnc.commit()
+#         cursor.execute(self.__options.get_good_id_by_name + f" {order.good_name}")
+#         good_id = cursor.fetchval()
+#         query = self.__options.create_goods_orders + f" {good_id}, {order_id}, {order.good_amount}"
+#         cursor.execute(query)
+#         cnc.commit()
+#         cursor.execute(self.__options.get_products_amount_and_id_by_order_id + f" {order_id}")
+#         products_id_and_amount = cursor.fetchall()
+#         for i in products_id_and_amount:
+#             cursor.execute(self.__options.get_product_amount + f" {i.product_id}")
+#             pr_am_in_stock = cursor.fetchval()
+#             cursor.execute(self.__options.get_product_name_by_id + f' {i.product_id}')
+#             pr_name = cursor.fetchval()
+#             if pr_am_in_stock < i.product_amount:
+#                 print(f'не хватает {pr_name}, нужно больше денег денег денег денег денег для {pr_name}')
+#                 return False
+#         for i in products_id_and_amount:
+#             print(i.product_id, i.product_amount)
+#             cursor.execute(self.__options.update_product_amount + f" {i.product_id}, -{i.product_amount}")
+#             cnc.commit()
+#         cursor.execute(self.__options.update_customer_summ_money + f" {order.customer_id}")
+#         cnc.commit()
+#         cnc.close()
+#         print('order have been added successfully, products_amount have been update successfuly, earned money have been update successfuly')

@@ -1,6 +1,8 @@
 import pyodbc
-from DataLogicLair.options import *
+
 from pyodbc import Error
+
+from restic_site.DataLogicLair.options import Options
 
 
 def get_connection():

@@ -1,5 +1,8 @@
-from DataLogicLair.get_conection import *
+
 from pyodbc import Error
+
+from restic_site.DataLogicLair.get_conection import get_connection
+from restic_site.DataLogicLair.options import Options
 
 
 class Goods_repository:
@@ -12,6 +15,7 @@ class Goods_repository:
             cursor = cnc.cursor()
             query = self.__options.create_good + f" '{good.name}', {good.cost}"
             cursor.execute(query)
+            cursor.execute(self.__options.create_goods_products + f" ")
             cnc.commit()
             cnc.close()
             print('good have been added successfully')

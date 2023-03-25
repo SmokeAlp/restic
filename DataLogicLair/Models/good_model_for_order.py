@@ -1,5 +1,7 @@
-from DataLogicLair.get_conection import *
-from DataLogicLair.options import *
+
+
+from restic_site.DataLogicLair.get_conection import get_connection
+from restic_site.DataLogicLair.options import Options
 
 
 class Good_for_order:

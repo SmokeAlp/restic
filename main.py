@@ -1,14 +1,7 @@
-from DataLogicLair.products_repository import *
-from DataLogicLair.goods_repository import *
-from DataLogicLair.orders_repository import *
-from DataLogicLair.goods_products_repository import *
-from DataLogicLair.Models.product_input_model import *
-from DataLogicLair.Models.good_input_model import *
-from DataLogicLair.Models.order_input_model import *
-from DataLogicLair.Models.customer_input_model import *
+
+
 from DataLogicLair.Models.good_model_for_order import *
-from DataLogicLair.Models.Capucino import *
-from DataLogicLair.customer_repository import *
+from restic_site.DataLogicLair.Models.good_input_model import Good
 
 # CREATE AND GET AND ADD PRODUCT
 # product = Product_repository()
@@ -22,14 +15,14 @@ from DataLogicLair.customer_repository import *
 #     print(i)
 
 # CREATE AND GET GOOD
-# good = Goods_repository()
-# good_model = Good('Capucino', 125)
-# good.create_good(good_model)
-#
-# res = good.get_all_goods()
-#
-# for i in res:
-#     print(i)
+good = Goods_repository()
+good_model = Good('Salad_2', 126)
+good.create_good(good_model)
+
+res = good.get_all_goods()
+
+for i in res:
+    print(i)
 
 
 # CREATE AND GET GOODS_PRODUCTS
@@ -127,74 +120,87 @@ from DataLogicLair.customer_repository import *
 # print(good_id.fetchval())
 
 
-options = Options()
-good_for_order_1 = Good_for_order('Capucino', 1)
-good_for_order_2 = Good_for_order("Salad", 3)
-goods = [good_for_order_1, good_for_order_2]
-
-cnc = get_connection()
-cursor = cnc.cursor()
-order = {
-    "cust_name": "Bebra",
-    "goods": goods
-}
-cursor.execute(options.get_all_customers_name)
-cust_names = cursor.fetchall()
-c_n = []
-for x in cust_names:
-    c_n += x
-print(c_n)
-if order.get("cust_name") in c_n:
-    print("OK vse")
-else:
-    cursor.execute(options.create_customer + f" {order.get('cust_name')}")
-    cnc.commit()
-    cursor.execute(options.get_all_customer)
-    c = cursor.fetchall()
-    print(c)
-
-
-# print(good_for_order_1.get_good_id_by_name())
-# print(good_for_order_1.get_needed_products_amount_and_id_for_good_by_good_id())
-
-
-# glsit2 = {}
-# praalistglav = {}
-# # {name: capcino, amount: 1}
-# for i in order.get("goods"):
-#     npr = i.get_needed_products_amount_and_id_for_good_by_good_id()
-#     pramlist = []
-#     for k in npr:
-#         print(k.id, k.product_amount)
-#         cursor.execute(options.get_product_amount_by_id + f" {k.id}")
-#         spram = cursor.fetchval()
-#         print(spram)
-#         rna = k.product_amount * i.amount
-#         print(rna)
-#         if rna > spram:
-#             pramlist.clear()
-#             break
-#         pramlist.append(k.id)
-#         pramlist.append(rna)
-#     if pramlist != []:
-#         for j in pramlist:
-glist1 = []
-for i in order.get('goods'):
-    for k in range(i.amount):
-        glist1.append(i.get_needed_products_amount_and_id_for_good_by_good_id())
-print(glist1)
-haventGoodds = []
-for i in glist1:
-    for k in i:
-        rna = k.product_amount
-        if rna > k.amount:
-            haventGoodds.append(i.id)
-        else:
-            k.product_amount -= rna
-if len(haventGoodds) > 0:
-    print(haventGoodds)
-    print("bebebe")
-
+# options = Options()
+# good_for_order_1 = Good_for_order('Capucino', 1)
+# good_for_order_2 = Good_for_order("Salad", 10)
+# goods = [good_for_order_1, good_for_order_2]
+#
+# cnc = get_connection()
+# cursor = cnc.cursor()
+# order = {
+#     "cust_name": "Bebra",
+#     "goods": goods
+# }
+# cursor.execute(options.get_all_customers_name)
+# cust_names = cursor.fetchall()
+# c_n = []
+# for x in cust_names:
+#     c_n += x
+# print(c_n)
+# if order.get("cust_name") in c_n:
+#     print("OK vse")
+# else:
+#     cursor.execute(options.create_customer + f" {order.get('cust_name')}")
+#     cnc.commit()
+#     cursor.execute(options.get_all_customer)
+#     c = cursor.fetchall()
+#     print(c)
+#
+# # print(good_for_order_1.get_good_id_by_name())
+# # print(good_for_order_1.get_needed_products_amount_and_id_for_good_by_good_id())
+#
+#
+# # glsit2 = {}
+# # praalistglav = {}
+# # # {name: capcino, amount: 1}
+# # for i in order.get("goods"):
+# #     npr = i.get_needed_products_amount_and_id_for_good_by_good_id()
+# #     pramlist = []
+# #     for k in npr:
+# #         print(k.id, k.product_amount)
+# #         cursor.execute(options.get_product_amount_by_id + f" {k.id}")
+# #         spram = cursor.fetchval()
+# #         print(spram)
+# #         rna = k.product_amount * i.amount
+# #         print(rna)
+# #         if rna > spram:
+# #             pramlist.clear()
+# #             break
+# #         pramlist.append(k.id)
+# #         pramlist.append(rna)
+# #     if pramlist != []:
+# #         for j in pramlist:
+# glist1 = []
+# needProducts = {}
+# productAmount = {}
+# for i in order.get('goods'):
+#     for product in i.get_needed_products_amount_and_id_for_good_by_good_id():
+#         if product.id not in needProducts.keys():
+#             needProducts[product.id] = product.product_amount * i.amount
+#         else:
+#             needProducts[product.id] += product.product_amount * i.amount
+# print(needProducts)
+#
+#     # for k in range(i.amount):
+#     #     glist1.append(i.get_needed_products_amount_and_id_for_good_by_good_id())
+# print(glist1)
+#
+#
+# haventGoodds = []
+# productsForOrder = {}
+# for i in glist1:
+#     for k in i:
+#         if k.id not in productsForOrder.keys():
+#             productsForOrder[k.id] = k.amount
+#             print(productsForOrder)
+#         if productsForOrder[k.id] > k.product_amount:
+#             productsForOrder[k.id] -= k.product_amount
+#         else:
+#             haventGoodds.append(k.id)
+#
+# if len(haventGoodds) > 0:
+#     print(haventGoodds)
+#     print("bebebe")
 
 # for i in order.get('goods'):
 #     print(i.name, i.amount)

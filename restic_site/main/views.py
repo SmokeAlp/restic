@@ -15,3 +15,15 @@ def cart(request):
         'goods_list': db_goods.get_all_goods(),
     }
     return render(request, 'main/cart.html', data)
+
+
+def catalog(request):
+    db_goods = Goods_repository()
+    data = {
+        'goods_list': db_goods.get_all_goods(),
+    }
+    return render(request, 'main/catalog.html', data)
+
+
+def about(request):
+    return render(request, 'main/about.html')

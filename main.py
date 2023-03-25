@@ -10,7 +10,6 @@ from DataLogicLair.Models.good_model_for_order import *
 from DataLogicLair.Models.Capucino import *
 from DataLogicLair.customer_repository import *
 
-
 # CREATE AND GET AND ADD PRODUCT
 # product = Product_repository()
 # product_model = Product('cake', 1200, 45, 'shtuka')

@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/catalog.css" %}" />
+{% endblock %}
+
+{% block title %}
+    Каталог товаров
+{% endblock %}
+
+
+{% block content %}
+    <div class="goods">
+    {% for good in goods_list %}
+        <div class="good">
+            <p class="good_info">Наименование: {{ good.name }}</p>
+            <p class="good_info">id: {{ good.id }}</p>
+            <p class="good_info">Цена: {{ good.cost }}</p>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

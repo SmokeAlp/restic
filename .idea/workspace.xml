@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba9ee488-266d-4b70-8e51-664952844006" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/restic.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/restic.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_03_2023_20_40__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_03_2023_20_40__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restic_site/main/templates/main/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/main/templates/main/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restic_site/main/templates/main/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/main/templates/main/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restic_site/main/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/main/templates/main/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restic_site/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/main/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restic_site/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/main/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restic_site/restic_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/restic_site/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restic_site/DataLogicLair/get_conection.py" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/DataLogicLair/get_conection.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

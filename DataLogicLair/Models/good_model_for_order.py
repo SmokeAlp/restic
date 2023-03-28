@@ -1,7 +1,8 @@
-
-
-from restic_site.DataLogicLair.get_conection import get_connection
-from restic_site.DataLogicLair.options import Options
+import os
+import sys
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
+from DataLogicLair.get_conection import get_connection
+from DataLogicLair.options import Options
 
 
 class Good_for_order:

@@ -6,18 +6,20 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static "css/base.css" %}" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     {% block css %}
     {% endblock %}
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     <header class="up_title">
-        <div>
-            <img class="logo" src="../../static/images/logo.jpg" alt="logo" >
-        </div>
+        <a href="/">
+            <div>
+                <img  class="logo" src="../../static/images/logo.jpg" alt="logo" >
+            </div>
+        </a>
         <ul class="menu">
-            <li {% if request.path == "/" %}class="active"{% endif %}><a class="menu_link" href="/">Главная</a></li>
+<!--            <li {% if request.path == "/" %}class="active"{% endif %}><a class="menu_link" href="/">Главная</a></li>-->
             <li {% if request.path == "/catalog" %}class="active"{% endif %}><a class="menu_link" href="/catalog">Каталог</a></li>
             <li {% if request.path == "/cart" %}class="active"{% endif %}><a class="menu_link" href="/cart">Корзина</a></li>
             <li {% if request.path == "/about" %}class="active"{% endif %}><a class="menu_link" href="/about">О нас</a></li>

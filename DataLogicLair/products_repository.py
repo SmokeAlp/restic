@@ -1,8 +1,6 @@
-
 from pyodbc import Error
-
-from restic_site.DataLogicLair.get_conection import get_connection
-from restic_site.DataLogicLair.options import Options
+from DataLogicLair.get_conection import get_connection
+from DataLogicLair.options import Options
 
 
 class Product_repository:
@@ -13,6 +11,14 @@ class Product_repository:
         try:
             cnc = get_connection()
             cursor = cnc.cursor()
+            prs_names = list(map(lambda x:x[1],self.get_all_products()))
+            if product.name in prs_names:
+                pr_id = cursor.execute(self.__options.get_product_id_by_name + f" '{product.name}'").fetchval()
+                print(f'нельзя с одинаковым именем: {product} совпадает с id:{pr_id}')
+                return
+            if product.amount < 0:
+                print(f'отрицательное значение количества продукта:{product.amount}')
+                return
             query = self.__options.create_product + f" '{product.name}', {product.amount}, {product.cost_per_amount}, {product.unit_of_measurement}"
             cursor.execute(query)
             cnc.commit()

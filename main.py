@@ -1,6 +1,7 @@
 from DataLogicLair.Models.good_model_for_order import *
 from DataLogicLair.Models.good_input_model import Good
 from DataLogicLair.goods_repository import Goods_repository
+from DataLogicLair.products_repository import *
 
 # CREATE AND GET AND ADD PRODUCT
 # product = Product_repository()
@@ -13,18 +14,55 @@ from DataLogicLair.goods_repository import Goods_repository
 # for i in res:
 #     print(i)
 
+
+
+
+
 # CREATE AND GET GOOD
-if __name__ == '__main__':
-    good = Goods_repository()
-    good_model = Good('Salad_2', 126, {2: 2, 4: 2})
-    print(good_model.products)
-    exit()
-good.create_good(good_model)
+good = Goods_repository()
+pr = Product_repository()
+l = list(map(lambda x:x[1],pr.get_all_products()))
+p = 'potato'
+print(p in l)
 
-res = good.get_all_goods()
 
-for i in res:
-    print(i)
+# good_model = Good('Beef', 126, {10: 10, 4: 2})
+# print(good_model)
+# good.create_good(good_model)
+#
+# res = good.get_all_goods()
+#
+# for i in res:
+#     print(i)
+
+# if (good_model.name == '') or (good_model.cost < 0) or (good_model.products == {}):
+#     print('неправильно переданы данные для create_good')
+# for i,b in good_model.products.items():
+#     if (type(i) is not int) or (type(b) is not int):
+#         print(f'неправильно переданы данные о продуктах: {i,b}')
+#         break
+#     elif i not in all_pr_id or b>10**3:
+#         print(f'передан несуществующий продукт или слишком большое его кол-во: {i},{b}')
+#         break
+# for i in good.get_all_goods():
+#     print(i)
+#     beb = True
+#     if i.name == good_model.name:
+#         print(f'нельзя с одинаковым именем: {good_model} совпадает с {i.name}(id:{i.id}) ')
+#         beb = False
+#         break
+# if beb:
+#     good.create_good(good_model)
+
+# for i in good.get_all_goods():
+#     print(i)
+
+
+
+
+
+
+
 
 # CREATE AND GET GOODS_PRODUCTS
 # good_product = Goods_products_repository()
@@ -58,6 +96,16 @@ for i in res:
 
 
 # opt = Options()
+
+
+
+
+
+
+
+
+
+
 
 # CREATE AND GET ORDER
 # order = Order_repository()

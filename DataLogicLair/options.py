@@ -5,6 +5,7 @@ class Options:
         self.create_product = 'exec createProducts'
         self.update_product_amount = 'exec updateProductAmount'
         self.get_all_products = 'exec getAllProducts'
+        self.get_all_products_id = 'exec getAllProductsId'
         self.get_product_id_by_name = 'exec getProductIdByName'
         self.check_summ_of_money_for_product_amount = 'exec checkSummOfMoneyForProductAmount'
         self.get_product_amount_by_id = 'exec getProductAmountById'

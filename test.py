@@ -1,5 +1,6 @@
-from DataLogicLair.Models.Capucino import *
+d =[(2,), (3,),(4,)]
 
-cap = Capucino(1)
 
-cap.get()
+
+keys = list(map(lambda x:x[0]**2, d))
+print(keys)

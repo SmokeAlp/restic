@@ -14,9 +14,11 @@
     <div class="goods">
     {% for good in goods_list %}
         <div class="good">
-            <p class="good_info">Наименование: {{ good.name }}</p>
+            <img class="good_image" src="../../static/images/{{ good.name }}.jpg">
+            <p class="good_info good_name">Наименование: {{ good.name }}</p>
             <p class="good_info">id: {{ good.id }}</p>
             <p class="good_info">Цена: {{ good.cost }}</p>
+            <button class="good_info add_btn">В корзину</button>
         </div>
     {% endfor %}
     </div>

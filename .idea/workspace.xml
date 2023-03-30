@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba9ee488-266d-4b70-8e51-664952844006" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/restic_site/DataLogicLair/get_conection.py" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/DataLogicLair/get_conection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restic_site/main/static/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/main/static/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restic_site/main/static/css/catalog.css" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/main/static/css/catalog.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restic_site/main/static/images/Donut.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/main/static/images/Donut.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restic_site/main/static/images/Salad.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/main/static/images/Salad.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restic_site/main/templates/main/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/main/templates/main/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restic_site/main/templates/main/catalog.html" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/main/templates/main/catalog.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -5,6 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba9ee488-266d-4b70-8e51-664952844006" name="Changes" comment="">
+<<<<<<< Updated upstream
+      <change beforePath="$PROJECT_DIR$/restic_site/DataLogicLair/get_conection.py" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/DataLogicLair/get_conection.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restic_site/main/static/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/main/static/css/base.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restic_site/main/static/css/catalog.css" beforeDir="false" afterPath="$PROJECT_DIR$/restic_site/main/static/css/catalog.css" afterDir="false" />
@@ -56,6 +61,7 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+<<<<<<< Updated upstream
     &quot;last_opened_file_path&quot;: &quot;C:/PythonProjects/restic/restic_site/main/media/images&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
@@ -72,6 +78,12 @@
       <recent name="C:\PythonProjects\restic\restic_site\main\media" />
     </key>
   </component>
+=======
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/9/Desktop/new_site&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  }
+}</component>
+>>>>>>> Stashed changes
   <component name="RunManager" selected="Python.main">
     <configuration name="get_conection" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="restic" />

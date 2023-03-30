@@ -1,4 +1,7 @@
 from django.shortcuts import render
+import os
+import sys
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from DataLogicLair.orders_repository import *
 from DataLogicLair.goods_repository import *
 

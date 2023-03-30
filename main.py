@@ -1,7 +1,6 @@
-
-
 from DataLogicLair.Models.good_model_for_order import *
-from restic_site.DataLogicLair.Models.good_input_model import Good
+from DataLogicLair.Models.good_input_model import Good
+from DataLogicLair.goods_repository import Goods_repository
 
 # CREATE AND GET AND ADD PRODUCT
 # product = Product_repository()
@@ -15,15 +14,17 @@ from restic_site.DataLogicLair.Models.good_input_model import Good
 #     print(i)
 
 # CREATE AND GET GOOD
-good = Goods_repository()
-good_model = Good('Salad_2', 126)
+if __name__ == '__main__':
+    good = Goods_repository()
+    good_model = Good('Salad_2', 126, {2: 2, 4: 2})
+    print(good_model.products)
+    exit()
 good.create_good(good_model)
 
 res = good.get_all_goods()
 
 for i in res:
     print(i)
-
 
 # CREATE AND GET GOODS_PRODUCTS
 # good_product = Goods_products_repository()

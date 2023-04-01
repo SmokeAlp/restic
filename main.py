@@ -172,85 +172,74 @@ for i in res_g_p:
 
 
 options = Options()
+# создаю продукты
 good_for_order_1 = Good_for_order('Capucino', 500000000)
 good_for_order_2 = Good_for_order("Salad", 1000000)
 good_for_order_3 = Good_for_order("Salad_2", 1000000000)
 good_for_order_4 = Good_for_order("fried potato", 1000000000)
 good_for_order_5 = Good_for_order("Pork Steak", 1000000000)
 good_for_order_6 = Good_for_order("Donut", 1000000000)
+#создаю список продуктов
 goods = [good_for_order_1, good_for_order_2,good_for_order_3,good_for_order_4, good_for_order_5,good_for_order_6]
 cnc = get_connection()
 cursor = cnc.cursor()
+# создаю заказ
 order = {
     "cust_name": "Bebra",
     "goods": goods
 }
-cust_names = cursor.execute(options.get_all_customers_name).fetchall()
-c_n = list(map(lambda x: x[0], cust_names))
-print(c_n)
-if order.get("cust_name") in c_n:
-    print("Такой покупатель существует")
+# проверка на существование покупателя в бд, если он новый то добавить
+# cust_names = cursor.execute(options.get_all_customers_name).fetchall()
+# c_n = list(map(lambda x: x[0], cust_names))
+# print(c_n)
+# if order.get("cust_name") in c_n:
+#     print("Такой покупатель существует")
 # else:
 #     cursor.execute(options.create_customer + f" {order.get('cust_name')}")
 #     cnc.commit()
 #     cursor.execute(options.get_all_customer)
 #     c = cursor.fetchall()
 #     print(c)
-#
-# # print(good_for_order_1.get_good_id_by_name())
-# # print(good_for_order_1.get_needed_products_amount_and_id_for_good_by_good_id())
-#
-#
-# # glsit2 = {}
-# # praalistglav = {}
-# # # {name: capcino, amount: 1}
-# # for i in order.get("goods"):
-# #     npr = i.get_needed_products_amount_and_id_for_good_by_good_id()
-# #     pramlist = []
-# #     for k in npr:
-# #         print(k.id, k.product_amount)
-# #         cursor.execute(options.get_product_amount_by_id + f" {k.id}")
-# #         spram = cursor.fetchval()
-# #         print(spram)
-# #         rna = k.product_amount * i.amount
-# #         print(rna)
-# #         if rna > spram:
-# #             pramlist.clear()
-# #             break
-# #         pramlist.append(k.id)
-# #         pramlist.append(rna)
-# #     if pramlist != []:
-# #         for j in pramlist:
 
-print(good_for_order_1.get_needed_products_amount_and_id_for_good_by_good_id())
 
 needProducts = {}
 for i in order.get('goods'):
     for product in i.get_needed_products_amount_and_id_for_good_by_good_id():
         print(product)
         if product.id not in needProducts.keys():
-            needProducts[product.id] = [product.product_amount * i.amount, product.amount]
+            needProducts[product.id] = [product.product_amount * i.amount, product.amount, i.get_good_id_by_name()]
         else:
             needProducts[product.id][0] += product.product_amount * i.amount
 print(needProducts)
+print('получаю id продукт , скоко надо и скоко есть на склад')
 haventGoodds = []
 problems_goods = {}
 for k,v in needProducts.items():
+    # сравниваю скоко надо и скоко есть
     if v[0] > v[1]:
-        haventGoodds.append(k)
-        problems_goods[k] = [v[1]]
-print(haventGoodds)
+        haventGoodds.append(k) # добавляю id продукта в список,содежащий id проблемных продуктов, если этого продукта не хватает
+        problems_goods[k] = [v[1]] # создаю в отдельном словаре {id проблемного продукта: [кол-во этого продукта на складе] }
+print(haventGoodds) # список idников проблемных продуктов
+print(problems_goods)# поулчается словарь с ключми из id проблемных продуктов , а значение - это список, в котором под 0-м индексом - это кол-во проблемного продукта на складе
+
+
 if len(haventGoodds) == 0:
     print('ok')
-else:
-    for i in order.get('goods'):
-        pr_nd_id_for_gd = list(map(lambda x: x[0], i.get_needed_products_amount_and_id_for_good_by_good_id()))
+else:# если в списке idников проблемных продуктов есть хотя бы 1 проблемный продукт то
+    for i in order.get('goods'): # пробегаюсь по товарам в заказе
+        pr_nd_id_for_gd = list(map(lambda x: x[0], i.get_needed_products_amount_and_id_for_good_by_good_id()))# получаю список id нужных продуктов для этого товара
         print(pr_nd_id_for_gd)
-        probl = list(set(pr_nd_id_for_gd) & set(haventGoodds))
+        probl = list(set(pr_nd_id_for_gd) & set(haventGoodds)) # если есть ли совпадения у списка проблемных idников продуктов и у списка idников продуктов для этого товара
+        # типа [1, 4, 6, 7, 12]-список id проблемных продуктов haventGooodds
+        # [1,2]- список id продуктов, нужных для i-того товара
+        # есть совпадения у продукта под id 1 --> добавлю этот id в новый список probl
+        print(probl, 'bebebe')
         if len(probl) > 0:
-            for k in probl:
-                problems_goods[k].append(i.name)
+            for k in probl:# пробегаюсь по списку probl
+                problems_goods[k].append(i.name) # k - это id проблемного продукта, мы находим такой же id пробелмного продукта в словаре problems_goods, как и k, и добавляем в список этому ключу имя товара i.name и кол-во товара в заказе
                 problems_goods[k].append(i.amount)
+                # { 1:[140]} было
+                #{1: [140, 'Salad',50000000]} стало
 
 print(problems_goods)
 for k,v in problems_goods.items():

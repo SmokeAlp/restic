@@ -5,8 +5,10 @@ import sys
 from django.views.generic import ListView
 
 from .forms import *
+from .utils import check_products_for_goods
 
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
+
 from DataLogicLair.orders_repository import *
 from DataLogicLair.goods_repository import *
 from DataLogicLair.products_repository import *
@@ -29,6 +31,7 @@ def cart(request):
 
 def catalog(request):
     db_goods = Goods_repository()
+    g = check_products_for_goods()
     data = {
         'goods_list': db_goods.get_all_goods(),
     }

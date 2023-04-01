@@ -12,6 +12,7 @@
 
 {% block content %}
     <div class="goods">
+    {{ goods_list }}
     {% for good in goods_list %}
         <div class="good">
             <img class="good_image" src="../../static/images/{{ good.name }}.jpg" alt="{{good.name}}">

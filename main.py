@@ -1,26 +1,27 @@
 from DataLogicLair.Models.good_model_for_order import *
 from DataLogicLair.Models.good_input_model import Good
 from DataLogicLair.Models.product_input_model import *
+from DataLogicLair.goods_products_repository import Goods_products_repository
 from DataLogicLair.goods_repository import Goods_repository
 from DataLogicLair.products_repository import *
 
 # CREATE AND GET AND ADD PRODUCT
-# product = Product_repository()
+product = Product_repository()
 # product_model = Product('cake', 1200, 45, 'shtuka')
 # product.create_product(product_model)
 #
 # product.add_product('Apple', 10)
-# res = product.get_all_products()
+res = product.get_all_products()
 #
-# for i in res:
-#     print(i)
+for i in res:
+    print(i)
 
 
 
 
 
 # CREATE AND GET GOOD
-# good = Goods_repository()
+good = Goods_repository()
 # pr = Product_repository()
 # l = list(map(lambda x:x[1],pr.get_all_products()))
 # p = 'potato'
@@ -31,10 +32,10 @@ from DataLogicLair.products_repository import *
 # print(good_model)
 # good.create_good(good_model)
 #
-# res = good.get_all_goods()
-#
-# for i in res:
-#     print(i)
+res = good.get_all_goods()
+
+for i in res:
+    print(i)
 
 # if (good_model.name == '') or (good_model.cost < 0) or (good_model.products == {}):
 #     print('неправильно переданы данные для create_good')
@@ -66,13 +67,13 @@ from DataLogicLair.products_repository import *
 
 
 # CREATE AND GET GOODS_PRODUCTS
-# good_product = Goods_products_repository()
+good_product = Goods_products_repository()
 # good_product.create_goods_products('coffee beans', 'Capucino', 1)
-#
-# res_g_p = good_product.get_all_goods_products()
-#
-# for i in res_g_p:
-#     print(i)
+
+res_g_p = good_product.get_all_goods_products()
+
+for i in res_g_p:
+    print(i)
 
 
 # opt = Options()
@@ -171,10 +172,13 @@ from DataLogicLair.products_repository import *
 
 
 options = Options()
-good_for_order_1 = Good_for_order('Capucino', 1)
-good_for_order_2 = Good_for_order("Salad", 100)
-goods = [good_for_order_1, good_for_order_2]
-
+good_for_order_1 = Good_for_order('Capucino', 500000000)
+good_for_order_2 = Good_for_order("Salad", 1000000)
+good_for_order_3 = Good_for_order("Salad_2", 1000000000)
+good_for_order_4 = Good_for_order("fried potato", 1000000000)
+good_for_order_5 = Good_for_order("Pork Steak", 1000000000)
+good_for_order_6 = Good_for_order("Donut", 1000000000)
+goods = [good_for_order_1, good_for_order_2,good_for_order_3,good_for_order_4, good_for_order_5,good_for_order_6]
 cnc = get_connection()
 cursor = cnc.cursor()
 order = {
@@ -219,9 +223,8 @@ if order.get("cust_name") in c_n:
 # #         for j in pramlist:
 
 print(good_for_order_1.get_needed_products_amount_and_id_for_good_by_good_id())
-glist1 = []
+
 needProducts = {}
-productAmount = {}
 for i in order.get('goods'):
     for product in i.get_needed_products_amount_and_id_for_good_by_good_id():
         print(product)
@@ -251,7 +254,7 @@ else:
 
 print(problems_goods)
 for k,v in problems_goods.items():
-    print(f'проблема с прод {k}({v[0]} на складе) для товаров:{v[1::3]}(нужно {v[3::3]} продуктоы для {v[2::3]} {v[1::3]}')
+    print(f'проблема с прод {k}({v[0]} на складе) для товаров:{v[1::2]}(нужно {v[2::2]} продуктов для {v[2::2]} {v[1::2]}')
 
 
 # for k in range(i.amount):

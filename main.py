@@ -1,5 +1,6 @@
 from DataLogicLair.Models.good_model_for_order import *
 from DataLogicLair.Models.good_input_model import Good
+from DataLogicLair.Models.product_input_model import *
 from DataLogicLair.goods_repository import Goods_repository
 from DataLogicLair.products_repository import *
 
@@ -19,11 +20,11 @@ from DataLogicLair.products_repository import *
 
 
 # CREATE AND GET GOOD
-good = Goods_repository()
-pr = Product_repository()
-l = list(map(lambda x:x[1],pr.get_all_products()))
-p = 'potato'
-print(p in l)
+# good = Goods_repository()
+# pr = Product_repository()
+# l = list(map(lambda x:x[1],pr.get_all_products()))
+# p = 'potato'
+# print(p in l)
 
 
 # good_model = Good('Beef', 126, {10: 10, 4: 2})
@@ -169,25 +170,22 @@ print(p in l)
 # print(good_id.fetchval())
 
 
-# options = Options()
-# good_for_order_1 = Good_for_order('Capucino', 1)
-# good_for_order_2 = Good_for_order("Salad", 10)
-# goods = [good_for_order_1, good_for_order_2]
-#
-# cnc = get_connection()
-# cursor = cnc.cursor()
-# order = {
-#     "cust_name": "Bebra",
-#     "goods": goods
-# }
-# cursor.execute(options.get_all_customers_name)
-# cust_names = cursor.fetchall()
-# c_n = []
-# for x in cust_names:
-#     c_n += x
-# print(c_n)
-# if order.get("cust_name") in c_n:
-#     print("OK vse")
+options = Options()
+good_for_order_1 = Good_for_order('Capucino', 1)
+good_for_order_2 = Good_for_order("Salad", 100)
+goods = [good_for_order_1, good_for_order_2]
+
+cnc = get_connection()
+cursor = cnc.cursor()
+order = {
+    "cust_name": "Bebra",
+    "goods": goods
+}
+cust_names = cursor.execute(options.get_all_customers_name).fetchall()
+c_n = list(map(lambda x: x[0], cust_names))
+print(c_n)
+if order.get("cust_name") in c_n:
+    print("Такой покупатель существует")
 # else:
 #     cursor.execute(options.create_customer + f" {order.get('cust_name')}")
 #     cnc.commit()
@@ -219,20 +217,45 @@ print(p in l)
 # #         pramlist.append(rna)
 # #     if pramlist != []:
 # #         for j in pramlist:
-# glist1 = []
-# needProducts = {}
-# productAmount = {}
-# for i in order.get('goods'):
-#     for product in i.get_needed_products_amount_and_id_for_good_by_good_id():
-#         if product.id not in needProducts.keys():
-#             needProducts[product.id] = product.product_amount * i.amount
-#         else:
-#             needProducts[product.id] += product.product_amount * i.amount
-# print(needProducts)
-#
-#     # for k in range(i.amount):
-#     #     glist1.append(i.get_needed_products_amount_and_id_for_good_by_good_id())
-# print(glist1)
+
+print(good_for_order_1.get_needed_products_amount_and_id_for_good_by_good_id())
+glist1 = []
+needProducts = {}
+productAmount = {}
+for i in order.get('goods'):
+    for product in i.get_needed_products_amount_and_id_for_good_by_good_id():
+        print(product)
+        if product.id not in needProducts.keys():
+            needProducts[product.id] = [product.product_amount * i.amount, product.amount]
+        else:
+            needProducts[product.id][0] += product.product_amount * i.amount
+print(needProducts)
+haventGoodds = []
+problems_goods = {}
+for k,v in needProducts.items():
+    if v[0] > v[1]:
+        haventGoodds.append(k)
+        problems_goods[k] = [v[1]]
+print(haventGoodds)
+if len(haventGoodds) == 0:
+    print('ok')
+else:
+    for i in order.get('goods'):
+        pr_nd_id_for_gd = list(map(lambda x: x[0], i.get_needed_products_amount_and_id_for_good_by_good_id()))
+        print(pr_nd_id_for_gd)
+        probl = list(set(pr_nd_id_for_gd) & set(haventGoodds))
+        if len(probl) > 0:
+            for k in probl:
+                problems_goods[k].append(i.name)
+                problems_goods[k].append(i.amount)
+
+print(problems_goods)
+for k,v in problems_goods.items():
+    print(f'проблема с прод {k}({v[0]} на складе) для товаров:{v[1::3]}(нужно {v[3::3]} продуктоы для {v[2::3]} {v[1::3]}')
+
+
+# for k in range(i.amount):
+#     glist1.append(i.get_needed_products_amount_and_id_for_good_by_good_id())
 #
 #
 # haventGoodds = []

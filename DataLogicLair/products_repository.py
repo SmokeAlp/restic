@@ -15,10 +15,10 @@ class Product_repository:
             if product.name in prs_names:
                 pr_id = cursor.execute(self.__options.get_product_id_by_name + f" '{product.name}'").fetchval()
                 print(f'нельзя с одинаковым именем: {product} совпадает с id:{pr_id}')
-                return
+                return False
             if product.amount < 0:
                 print(f'отрицательное значение количества продукта:{product.amount}')
-                return
+                return False
             query = self.__options.create_product + f" '{product.name}', {product.amount}, {product.cost_per_amount}, {product.unit_of_measurement}"
             cursor.execute(query)
             cnc.commit()

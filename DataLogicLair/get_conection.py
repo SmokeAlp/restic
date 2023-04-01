@@ -10,7 +10,6 @@ def get_connection():
     conString = Options()
     try:
         connection = pyodbc.connect(conString.connection_string)
-        print("MySQL Database connection successful...")
     except Error as err:
         print(f"Error: '{err}'")
     return connection

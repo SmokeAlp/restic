@@ -6,6 +6,13 @@ body {
 
 .up_title  {
     background-color: rgb(255,214,179);
+    /*
+    background: rgb(2,0,36);
+    background: -moz-linear-gradient(295deg, rgba(2,0,36,1) 29%, rgba(119,89,255,1) 79%, rgba(0,104,255,1) 100%);
+    background: -webkit-linear-gradient(295deg, rgba(2,0,36,1) 29%, rgba(119,89,255,1) 79%, rgba(0,104,255,1) 100%);
+    background: linear-gradient(295deg, rgba(2,0,36,1) 29%, rgba(119,89,255,1) 79%, rgba(0,104,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#0068ff",GradientType=1);
+    */
     display: flex;
     flex-direction: row;
     align-items: center;

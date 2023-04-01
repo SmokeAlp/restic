@@ -15,7 +15,8 @@ class Good_for_order:
         self.products_for_this_good = []
 
     def get_good_id_by_name(self):
-        self.__cursor.execute(self.__options.get_good_id_by_name + f" {self.name}")
+        print(self.name)
+        self.__cursor.execute(self.__options.get_good_id_by_name + f" '{self.name}'")
         return self.__cursor.fetchval()
 
     def get_needed_products_amount_and_id_for_good_by_good_id(self):

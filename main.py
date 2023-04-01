@@ -1,9 +1,14 @@
 from DataLogicLair.Models.good_model_for_order import *
+<<<<<<< Updated upstream
 from DataLogicLair.Models.good_input_model import Good
 from DataLogicLair.Models.product_input_model import *
 from DataLogicLair.goods_products_repository import Goods_products_repository
 from DataLogicLair.goods_repository import Goods_repository
 from DataLogicLair.products_repository import *
+=======
+from DataLogicLair.goods_repository import Goods_repository
+from restic_site.DataLogicLair.Models.good_input_model import Good
+>>>>>>> Stashed changes
 
 # CREATE AND GET AND ADD PRODUCT
 product = Product_repository()

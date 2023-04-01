@@ -15,11 +15,11 @@
     {{ goods_list }}
     {% for good in goods_list %}
         <div class="good">
-            <img class="good_image" src="../../static/images/{{ good.name }}.jpg" alt="{{good.name}}">
-            <p class="good_info good_name">Наименование: {{ good.name }}</p>
-            <p class="good_info">id: {{ good.id }}</p>
-            <p class="good_info">Цена: {{ good.cost }}</p>
-            <button class="good_info add_btn" type="submit">В корзину</button>
+            <img class="good_image" src="../../static/images/{{ good.0.name }}.jpg" alt="{{good.0.name}}">
+            <p class="good_info good_name">Наименование: {{ good.0.name }}</p>
+            <p class="good_info">id: {{ good.0.id }}</p>
+            <p class="good_info">Цена: {{ good.0.cost }}</p>
+            <button class="good_info add_btn" {%if not good.1%} disabled {% endif %} type="submit">В корзину</button>
         </div>
     {% endfor %}
     </div>

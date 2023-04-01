@@ -5,7 +5,7 @@ import sys
 from django.views.generic import ListView
 
 from .forms import *
-from .utils import check_products_for_goods
+
 
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 
@@ -20,18 +20,16 @@ def index(request):
 
 
 def cart(request):
-    db_orders = Order_repository()
-    db_goods = Goods_repository()
     data = {
-        'orders_list': db_orders.get_all_orders(),
-        'goods_list': db_goods.get_all_goods(),
+        'orders_list': ordersInCart,
+        'goods_list': "bbebebebe",
     }
     return render(request, 'main/cart.html', data)
 
 
 def catalog(request):
     db_goods = Goods_repository()
-    g = check_products_for_goods()
+    #проверка
     data = {
         'goods_list': db_goods.get_all_goods(),
     }

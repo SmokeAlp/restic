@@ -48,22 +48,36 @@ class Goods_repository:
     def get_all_goods(self):
         cnc = get_connection()
         cursor = cnc.cursor()
-        query = self.__options.get_all_goods
-        cursor.execute(query)
+        cursor.execute(self.__options.get_all_goods)
         goods = cursor.fetchall()
-        needProducts = {}
-        for good in ordersInCart:
-            for product in good.get_needed_products_amount_and_id_for_good_by_good_id():
-                print(product)
-                if product.id not in needProducts.keys():
-                    needProducts[product.id] = product.product_amount * good.amount
-                else:
-                    needProducts[product.id] += product.product_amount * good.amount
-
-        goodsR = []
-        for good in goods:
-            ok = True
-            for product in get_needed_products_amount_and_id_for_good_by_good_id(good.id):
-                ok = ok and product.product_amount + needProducts[product.id] <= product.amount
-            goodsR.append([good, ok])
+        if len(ordersInCart) > 0:
+            needProducts = {}
+            for good in ordersInCart:
+                for product in good.get_needed_products_amount_and_id_for_good_by_good_id():
+                    if product.id not in needProducts.keys():
+                        needProducts[product.id] = product.product_amount * good.amount
+                    else:
+                        needProducts[product.id] += product.product_amount * good.amount
+            goodsR = []
+            for good in goods:
+                ok = True
+                # print(good, good.id)
+                # print(get_needed_products_amount_and_id_for_good_by_good_id(good.id))
+                for product in get_needed_products_amount_and_id_for_good_by_good_id(good.id):
+                    # print(product.id)
+                    # print(get_needed_products_amount_and_id_for_good_by_good_id(8))
+                    # print(product.amount, product.product_amount)
+                    # print(needProducts.get(product.id), ' bebebebe')
+                    if needProducts.get(product.id) == None:
+                        ok = ok and product.product_amount <= product.amount
+                    else:
+                        ok = ok and product.product_amount + needProducts[product.id] <= product.amount
+                goodsR.append([good, ok])
+        else:
+            goodsR = []
+            for good in goods:
+                ok = True
+                for product in get_needed_products_amount_and_id_for_good_by_good_id(good.id):
+                    ok = ok and product.product_amount <= product.amount
+                goodsR.append([good, ok])
         return goodsR

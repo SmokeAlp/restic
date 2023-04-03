@@ -1,12 +1,12 @@
-# from DataLogicLair.Models.good_model_for_order import *
-#
-# from DataLogicLair.Models.good_input_model import Good
-# from DataLogicLair.Models.product_input_model import *
-# from DataLogicLair.goods_products_repository import Goods_products_repository
-# from DataLogicLair.goods_repository import Goods_repository
-# from DataLogicLair.products_repository import *
-#
-# from DataLogicLair.goods_repository import Goods_repository
+from DataLogicLair.Models.good_model_for_order import *
+
+from DataLogicLair.Models.good_input_model import Good
+from DataLogicLair.Models.product_input_model import *
+from DataLogicLair.goods_products_repository import Goods_products_repository
+from DataLogicLair.goods_repository import Goods_repository
+from DataLogicLair.products_repository import *
+
+from DataLogicLair.goods_repository import Goods_repository
 #
 # # CREATE AND GET AND ADD PRODUCT
 # product = Product_repository()
@@ -281,3 +281,14 @@ from DataLogicLair.Models.good_model_for_order import Good_for_order
 
 # print(good.cursor_description)
 # goods.append(i)
+
+
+
+
+opt = Options()
+cnc = get_connection()
+cursor = cnc.cursor()
+good = Goods_repository()
+pr = Product_repository()
+
+

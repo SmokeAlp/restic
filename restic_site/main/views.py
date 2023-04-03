@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 import os
 import sys
 
-from django.views.generic import ListView
 
 from .forms import *
 
@@ -29,9 +28,20 @@ def cart(request):
 
 def catalog(request):
     db_goods = Goods_repository()
-    #проверка
+    if request.POST:
+        form = AddGoodInToCartForm(request.POST)
+        if form.is_valid():
+            values = {
+                'name': form.cleaned_data.get('name'),
+                'amount': form.cleaned_data.get('amount')
+            }
+            print(values.get('name'), values.get('amount'))
+    else:
+        form = AddGoodInToCartForm()
     data = {
+        # проверка
         'goods_list': db_goods.get_all_goods(),
+        'form': form
     }
     return render(request, 'main/catalog.html', data)
 
@@ -42,6 +52,8 @@ def about(request):
 
 def admin_panel(request):
     if request.method == 'POST':
+        # good = request.POST.get('good')
+        # print(good)
         form = CreateProductForm(request.POST)
         if form.is_valid():
             values = {
@@ -59,3 +71,5 @@ def admin_panel(request):
     else:
         form = CreateProductForm()
     return render(request, 'main/admin_panel.html', {"cr_pr_form": form})
+
+

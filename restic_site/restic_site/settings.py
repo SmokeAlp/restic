@@ -77,10 +77,21 @@ WSGI_APPLICATION = 'restic_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "ENGINE": "mssql",
+        "NAME": "restic",
+        "USER": "deadinside228pro",
+        "PASSWORD": "228",
+        "HOST": "5.19.233.233\MSSQLSERVER,49172",
+        "PORT": "1433",
+        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server"},
     }
 }
 

@@ -14,6 +14,11 @@ def get_needed_products_amount_and_id_for_good_by_good_id(goods_id):
         opt.get_needed_products_amount_and_id_for_good_by_good_id + f" {goods_id}")
     return cursor.fetchall()
 
+def max_value_good_amount(good_id):
+    l = list(map(lambda x: x[2]//x[1], get_needed_products_amount_and_id_for_good_by_good_id(good_id)))
+    return min(l)
+
+
 
 class Good_for_order:
     def __init__(self, name, amount):

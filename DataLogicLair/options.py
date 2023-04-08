@@ -4,6 +4,7 @@ class Options:
         #PRODUCTS
         self.create_product = 'exec createProducts'
         self.update_product_amount = 'exec updateProductAmount'
+        self.delete_product = 'exec deleteProduct'
         self.get_all_products = 'exec getAllProducts'
         self.get_all_products_id = 'exec getAllProductsId'
         self.get_product_id_by_name = 'exec getProductIdByName'
@@ -12,6 +13,7 @@ class Options:
         self.get_product_name_by_id = 'exec getProductNameById'
         self.get_products_amount_and_id_by_order_id = 'exec getProductsAmountAndIdByOrderId'
         self.get_needed_products_amount_and_id_for_good_by_good_id = "exec getNeededProductsAmountAndIdForGoodByGoodId"
+        self.get_goods_from_carts_by_product_id = f"exec getGoodsFromCartsByProductId"
         #GOODS
         self.get_all_goods = 'exec getAllGoods'
         self.create_good = 'exec createGoods'

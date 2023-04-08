@@ -1,13 +1,32 @@
 from DataLogicLair.Models.good_model_for_order import *
-
-from DataLogicLair.Models.good_input_model import Good
+from DataLogicLair.Models.good_input_model import *
 from DataLogicLair.Models.product_input_model import *
-from DataLogicLair.goods_products_repository import Goods_products_repository
-from DataLogicLair.goods_repository import Goods_repository
-from DataLogicLair.products_repository import *
 
-from DataLogicLair.goods_repository import Goods_repository
-#
+from DataLogicLair.goods_products_repository import *
+from DataLogicLair.goods_repository import *
+from DataLogicLair.orders_repository import *
+from DataLogicLair.products_repository import *
+from DataLogicLair.goods_repository import *
+
+
+#Исходники
+options = Options()
+cnc = get_connection()
+cursor = cnc.cursor()
+
+good = Goods_repository()
+
+product = Product_repository()
+
+order = Order_repository()
+
+
+
+
+
+
+
+
 # # CREATE AND GET AND ADD PRODUCT
 # product = Product_repository()
 # # product_model = Product('cake', 1200, 45, 'shtuka')
@@ -282,13 +301,29 @@ from DataLogicLair.Models.good_model_for_order import Good_for_order
 # print(good.cursor_description)
 # goods.append(i)
 
+print(product.get_all_products())
+
+# product_model =
+# product.create_product()
+#
+# product.delete_product()
+#
+# cursor.execute(options.get_goods_from_carts_by_product_id + f" {product_id}")
+#
+# if len(cursor.fetchall()) != 0:
+#     cursor.execute()
+# else:
+#     cursor.execute(options.delete_product + f" {product_id}")
+#     print('succsec')
 
 
 
-opt = Options()
-cnc = get_connection()
-cursor = cnc.cursor()
-good = Goods_repository()
-pr = Product_repository()
+
+
+
+
+
+
+
 
 

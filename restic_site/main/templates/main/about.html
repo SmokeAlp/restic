@@ -13,4 +13,18 @@
 
 {% block content %}
     <p class="patatars">МАКС СЛИШКОМ ЛЕНИВЫЙ</p>
+
+
+
+    <form action="about" method="post">
+        {% csrf_token %}
+
+        {% for i in form %}
+        <div style="margin: 10px;">{{ i }}</div>
+        <div style="margin: 10px;">{{ i.errors }}</div>
+        {% endfor %}
+        <button type="submit"> BEBEBE </button>
+    </form>
+
+
 {% endblock %}

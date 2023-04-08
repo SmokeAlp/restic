@@ -14,6 +14,8 @@ from DataLogicLair.products_repository import *
 from DataLogicLair.Models.product_input_model import *
 
 
+product_repo = Product_repository()
+
 def index(request):
     return render(request, 'main/index.html')
 
@@ -47,13 +49,22 @@ def catalog(request):
 
 
 def about(request):
-    return render(request, 'main/about.html')
+    if request.method == 'POST':
+        form = TestForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data.items()
+            for i in data:
+                print(i[1], type(i[1]))
+            print(type(data), data)
+        else:
+            print(form.errors)
+    else:
+        form = TestForm()
+    return render(request, 'main/about.html', {'form': form})
 
 
 def admin_panel(request):
     if request.method == 'POST':
-        # good = request.POST.get('good')
-        # print(good)
         form = CreateProductForm(request.POST)
         if form.is_valid():
             values = {
@@ -63,13 +74,12 @@ def admin_panel(request):
                 'unit_of_measurement': form.cleaned_data.get('unit_of_measurement')
             }
             pr = Product(values.get('name'), values.get('amount'), values.get('cost_per_amount'), values.get('unit_of_measurement'))
-            print(pr)
-            pr_rep = Product_repository()
-            pr_rep.create_product(pr)
-            if not pr_rep.create_product(pr):
-                form['error'] = pr_rep.create_product(pr)
+            # product_repo.create_product(pr)
+            # print(type(pr_rep.create_product(pr)[0]))
+        else:
+            ...
     else:
         form = CreateProductForm()
-    return render(request, 'main/admin_panel.html', {"cr_pr_form": form})
+    return render(request, 'main/admin_panel.html', {"form": form})
 
 

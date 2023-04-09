@@ -12,7 +12,6 @@
 
 {% block content %}
     <div class="goods">
-    {{ goods_list }}
     {% for good in goods_list %}
         <div class="good">
             <form action="{% url 'catalog' %}" method="post">

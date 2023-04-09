@@ -13,6 +13,3 @@ def get_connection():
     except Error as err:
         print(f"Error: '{err}'")
     return connection
-
-
-

@@ -6,7 +6,11 @@
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
+<<<<<<< Updated upstream
     <orderEntry type="inheritedJdk" />
+=======
+    <orderEntry type="jdk" jdkName="Python 3.10" jdkType="Python SDK" />
+>>>>>>> Stashed changes
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">

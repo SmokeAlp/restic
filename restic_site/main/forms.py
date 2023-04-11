@@ -5,6 +5,8 @@ from django import forms
 import os
 import sys
 
+from .models import ProductModel
+
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from DataLogicLair.products_repository import *
 from DataLogicLair.goods_repository import *
@@ -14,12 +16,17 @@ l = []
 for i in products.get_all_products():
     l.append((i.id, i.name))
 
-class CreateProductForm(forms.Form):
-    name = forms.CharField(max_length=107, widget=forms.TextInput(attrs={'class': 'form-control input-lg', 'placeholder': 'имя продукта'}))
-    amount = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control input-lg', 'placeholder': 'кол-во продукта'}))
-    cost_per_amount = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control input-lg', 'placeholder': 'цена за определенное кол-во продукта'}))
-    unit_of_measurement = forms.CharField(max_length=37, widget=forms.TextInput(attrs={'class': 'form-control input-lg', 'placeholder': 'единица измерения для продукта'}))
 
+class CreateProductForm(forms.ModelForm):
+    class Meta:
+        model = ProductModel
+        fields = ['name', 'amount', 'cost_per_amount', 'unit_of_measurement']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control input-lg', 'placeholder': 'имя продукта'}),
+            'amount': forms.NumberInput(attrs={'class': 'form-control input-lg', 'placeholder': 'кол-во продукта'}),
+            'cost_per_amount': forms.NumberInput(attrs={'class': 'form-control input-lg', 'placeholder': 'цена за единицу продукта'}),
+            'unit_of_measurement': forms.TextInput(attrs={'class': 'form-control input-lg', 'placeholder': 'единица измер продукта'})
+        }
 
 
 class AddProductForm(forms.Form):
@@ -51,3 +58,13 @@ class TestForm(forms.Form):
     RegexField = forms.RegexField(empty_value='bbe', regex='1') #hz che eto
     TypedMultipleChoiceField = forms.TypedMultipleChoiceField(coerce=int, choices=l)
     ComboField = forms.ComboField(fields=[forms.IntegerField()], widget=forms.SelectMultiple(choices=l))
+
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = ProductModel
+        fields = ['name', 'amount']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control input-lg', 'placeholder': 'имя продукта'}),
+            'amount': forms.NumberInput(attrs={'class': 'form-control input-lg', 'placeholder': 'кол-во продукта'})
+        }

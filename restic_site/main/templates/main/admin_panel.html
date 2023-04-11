@@ -18,16 +18,16 @@
                     {% csrf_token %}
                     {% for i in form %}
                         {% if i.field.required %}
-                            <div class="col-sm-7 div_inp">{{ i.field.widget.attrs.placeholder }}</div><br>
+                            <div class="col-sm-7 div_inp">{{ i }}</div><br>
                         {% else %}
-                            <div class="col-sm-7 div_inp">{{ i.field.widget.attrs.class }}</div><br>
+                            <div class="col-sm-7 div_inp">{{ i }}</div><br>
                         {% endif %}
                     {% endfor %}
+                    {{ form.errors }}
                     <button type="submit" class="btn btn-primary div_inp">Создать продукт</button>
                 </form>
         </div>
     </div>
-    {{form}}
 </div>
 
 {% endblock %}

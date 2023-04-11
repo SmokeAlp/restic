@@ -18,13 +18,15 @@
 
     <form action="about" method="post">
         {% csrf_token %}
+        {{ form.as_p }}
 
-        {% for i in form %}
-        <div style="margin: 10px;">{{ i }}</div>
-        <div style="margin: 10px;">{{ i.errors }}</div>
-        {% endfor %}
         <button type="submit"> BEBEBE </button>
     </form>
 
 
 {% endblock %}
+
+<!--        {% for i in form %}&ndash;&gt;-->
+<!--        <div style="margin: 10px;">{{ i }}</div>-->
+<!--        <div style="margin: 10px;">{{ i.errors }}</div>-->
+<!--        {% endfor %}

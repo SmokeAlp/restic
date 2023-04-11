@@ -50,20 +50,19 @@ def catalog(request):
 
 def about(request):
     if request.method == 'POST':
-        form = TestForm(request.POST)
+        form = ProductForm(request.POST)
         if form.is_valid():
-            data = form.cleaned_data.items()
-            for i in data:
-                print(i[1], type(i[1]))
-            print(type(data), data)
+            data = form.data
+            print(data)
         else:
             print(form.errors)
     else:
-        form = TestForm()
+        form = ProductForm()
     return render(request, 'main/about.html', {'form': form})
 
 
 def admin_panel(request):
+    errors = {}
     if request.method == 'POST':
         form = CreateProductForm(request.POST)
         if form.is_valid():
@@ -73,11 +72,17 @@ def admin_panel(request):
                 'cost_per_amount': form.cleaned_data.get('cost_per_amount'),
                 'unit_of_measurement': form.cleaned_data.get('unit_of_measurement')
             }
+            for i in values.values():
+                try:
+                    beb = int(i)
+                except:
+                    errors[i] = 'Error'
+                print(i, type(i))
+            print(errors)
             pr = Product(values.get('name'), values.get('amount'), values.get('cost_per_amount'), values.get('unit_of_measurement'))
+            print(pr)
             # product_repo.create_product(pr)
             # print(type(pr_rep.create_product(pr)[0]))
-        else:
-            ...
     else:
         form = CreateProductForm()
     return render(request, 'main/admin_panel.html', {"form": form})

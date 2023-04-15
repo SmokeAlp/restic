@@ -12,12 +12,12 @@ sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from DataLogicLair.products_repository import *
 from DataLogicLair.goods_repository import *
 
-# GOOD_AMOUNT_CHOICES = [(i, str(i)) for i in range(1, 21)]
+GOOD_AMOUNT_CHOICES = [(i, str(i)) for i in range(1, 21)]
 
 
-# class CartAddGoodForm(forms.Form):
-#     amount = forms.TypedChoiceField(choices=GOOD_AMOUNT_CHOICES, coerce=int)
-#     update = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
+class CartAddGoodForm(forms.Form):
+     amount = forms.TypedChoiceField(choices=GOOD_AMOUNT_CHOICES, coerce=int)
+     update = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
 
 
 products = Product_repository()

@@ -18,9 +18,9 @@
             <a href="/"><img class="logo" src="../../static/images/logo.jpg" alt="logo" ></a>
         </div>
         <ul class="menu">
-<!--            <li {% if request.path == "/" %}class="active"{% endif %}><a class="menu_link" href="/">Главная</a></li>-->
+            <li {% if request.path == "/" %}class="active"{% endif %}><a class="menu_link" href="/">Главная</a></li>
             <li {% if request.path == "/catalog" %}class="active"{% endif %}><a class="menu_link" href="/catalog">Каталог</a></li>
-            <li {% if request.path == "/cart" %}class="active"{% endif %}><a class="menu_link" href="/cart">Корзина</a></li>
+            <li {% if request.path == "/detail" %}class="active"{% endif %}><a class="menu_link" href="/cart">Корзина</a></li>
             <li {% if request.path == "/about" %}class="active"{% endif %}><a class="menu_link" href="{% url 'about' %}">О нас</a></li>
             <li {% if request.path == "/admin_panel" %}class="active"{% endif %}><a class="menu_link" href="{% url 'admin_panel' %}">Панель админа</a></li>
         </ul>

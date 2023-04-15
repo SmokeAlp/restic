@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 import os
 import sys
 
@@ -12,6 +12,13 @@ from DataLogicLair.orders_repository import *
 from DataLogicLair.goods_repository import *
 from DataLogicLair.products_repository import *
 from DataLogicLair.Models.product_input_model import *
+
+
+from django.views.decorators.http import require_POST
+from .models import GoodModel
+
+# from .cart import Cart
+# from .forms import CartAddGoodForm
 
 
 product_repo = Product_repository()
@@ -88,3 +95,25 @@ def admin_panel(request):
     return render(request, 'main/admin_panel.html', {"form": form})
 
 
+# @require_POST
+# def cart_add(request, good_id):
+#     cart = Cart(request)
+#     good = get_object_or_404(GoodModel, id=good_id)
+#     form = CartAddGoodForm(request.POST)
+#     if form.is_valid():
+#         cd = form.cleaned_data
+#         cart.add(good=good,
+#                  amount=cd['amount'],
+#                  update_amount=cd['update'])
+#     return redirect('cart:cart_detail')
+#
+#
+# def cart_remove(request, good_id):
+#     cart = Cart(request)
+#     good = get_object_or_404(GoodModel, id=good_id)
+#     cart.remove(good)
+#     return redirect('cart:cart_detail')
+#
+# def cart_detail(request):
+#     cart = Cart(request)
+#     return render(request, 'cart/detail.html', {'cart': cart})

@@ -56,7 +56,7 @@ def __iter__(self):
     # получение объектов product и добавление их в корзину
     goods = GoodModel.objects.filter(id__in=good_ids)
     for good in goods:
-        self.cart[str(good.id)]['product'] = product
+        self.cart[str(good.id)]['good'] = good
 
     for item in self.cart.values():
         item['cost'] = Decimal(item['cost'])

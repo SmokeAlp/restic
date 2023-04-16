@@ -27,18 +27,18 @@ def index(request):
     return render(request, 'main/index.html')
 
 
-def cart(request):
-    data = {
-        'orders_list': ordersInCart,
-        'goods_list': "bbebebebe",
-    }
-    return render(request, 'main/cart.html', data)
+# def cart(request):
+#     data = {
+#         'orders_list': ordersInCart,
+#         'goods_list': "bbebebebe",
+#     }
+#     return render(request, 'main/cart.html', data)
 
 
 def catalog(request):
     db_goods = Goods_repository()
     if request.POST:
-        form = AddGoodInToCartForm(request.POST)
+        form = CartAddGoodForm(request.POST)
         if form.is_valid():
             values = {
                 'name': form.cleaned_data.get('name'),
@@ -46,13 +46,13 @@ def catalog(request):
             }
             print(values.get('name'), values.get('amount'))
     else:
-        form = AddGoodInToCartForm()
+        form = CartAddGoodForm()
     data = {
         # проверка
         'goods_list': db_goods.get_all_goods(),
-        'form': form
+        'form': form,
     }
-    return render(request, 'main/catalog.html', data)
+    return render(request, 'cart/catalog.html', data)
 
 
 def about(request):
@@ -113,6 +113,7 @@ def cart_remove(request, good_id):
     good = get_object_or_404(GoodModel, id=good_id)
     cart.remove(good)
     return redirect('cart:cart_detail')
+
 
 def cart_detail(request):
     cart = Cart(request)

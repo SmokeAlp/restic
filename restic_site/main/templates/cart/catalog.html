@@ -14,7 +14,7 @@
     <div class="goods">
     {% for good in goods_list %}
         <div class="good">
-            <form class="good" action="{% url 'catalog' %}" method="post">
+            <form class="good" action="{% url 'cart_add' %}" method="post">
             {% csrf_token %}
             <img class="good_image" src="{{ good.0.images }}" alt="{{good.0.name}}">
             <p class="good_info good_name">Наименование: {{ good.0.name }}</p>

@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
 from .models import GoodModel
+from DataLogicLair.goods_repository import *
 
 
 class Cart(object):
@@ -23,7 +24,7 @@ class Cart(object):
         """
         good_id = str(good.id)
         if good_id not in self.cart:
-            self.cart[good_id] = {'amount': 0, 'price': str(good.price)}
+            self.cart[good_id] = {'amount': 0, 'cost': str(good.cost)}
         if update_amount:
             self.cart[good_id]['amount'] = amount
         else:
@@ -54,9 +55,14 @@ class Cart(object):
         """
         good_ids = self.cart.keys()
         # получение объектов product и добавление их в корзину
-        goods = GoodModel.objects.filter(id__in=good_ids)
+        goodes = Goods_repository().get_all_goods()
+        goods = []
+        for item in goodes:
+            if str(item.id) in good_ids:
+                goods.append(item)
         for good in goods:
             self.cart[str(good.id)]['good'] = good
+        print(self.cart)
 
         for item in self.cart.values():
             item['cost'] = Decimal(item['cost'])

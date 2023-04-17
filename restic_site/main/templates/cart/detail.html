@@ -30,7 +30,8 @@
                     </td>
                     <td>{{ good.name }}</td>
                     <td>{{ item.amount }}</td>
-                    <td><a href="{% url "cart:cart_remove" good.id%}">Remove</a></td>
+                    <td>{{ item }}</td>
+                    <td><a href="{% url "cart_remove" good.id%}">Remove</a></td>
                     <td class="num">${{ item.cost }}</td>
                     <td class="num">${{ item.total_cost }}</td>
                 </tr>

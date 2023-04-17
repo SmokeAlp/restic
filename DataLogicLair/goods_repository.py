@@ -45,7 +45,7 @@ class Goods_repository:
         except Error as err:
             print(f'create_good_error: {err}')
 
-    def get_all_goods(self):
+    def get_all_goods_cart(self):
         cnc = get_connection()
         cursor = cnc.cursor()
         cursor.execute(self.__options.get_all_goods)
@@ -81,3 +81,10 @@ class Goods_repository:
                     ok = ok and product.product_amount <= product.amount
                 goodsR.append([good, ok])
         return goodsR
+
+    def get_all_goods(self):
+        cnc = get_connection()
+        cursor = cnc.cursor()
+        cursor.execute(self.__options.get_all_goods)
+        goods = cursor.fetchall()
+        return goods

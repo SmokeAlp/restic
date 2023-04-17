@@ -18,7 +18,7 @@ GOOD_AMOUNT_CHOICES = [(i, str(i)) for i in range(1, 21)]
 class CartAddGoodForm(forms.Form):
     name = forms.CharField(max_length=100)
     amount = forms.IntegerField(min_value=1, max_value=10)
-    # update = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
+    update = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
 
 
 products = Product_repository()

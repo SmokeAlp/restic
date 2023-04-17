@@ -49,7 +49,7 @@ def catalog(request):
         form = CartAddGoodForm()
     data = {
         # проверка
-        'goods_list': db_goods.get_all_goods(),
+        'goods_list': db_goods.get_all_goods_cart(),
         'form': form,
     }
     return render(request, 'cart/catalog.html', data)
@@ -97,22 +97,32 @@ def admin_panel(request):
 
 @require_POST
 def cart_add(request, good_id):
+    goods_rep = Goods_repository()
+    goods = goods_rep.get_all_goods()
     cart = Cart(request)
-    good = get_object_or_404(GoodModel, id=good_id)
+    good = None
+    for item in goods:
+        if item.id == int(good_id):
+            good = item
     form = CartAddGoodForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
         cart.add(good=good,
                  amount=cd['amount'],
                  update_amount=cd['update'])
-    return redirect('cart:cart_detail')
+    return redirect('cart_detail')
 
 
 def cart_remove(request, good_id):
+    goods_rep = Goods_repository()
+    goods = goods_rep.get_all_goods()
     cart = Cart(request)
-    good = get_object_or_404(GoodModel, id=good_id)
+    good = None
+    for item in goods:
+        if item.id == int(good_id):
+            good = item
     cart.remove(good)
-    return redirect('cart:cart_detail')
+    return redirect('cart_detail')
 
 
 def cart_detail(request):

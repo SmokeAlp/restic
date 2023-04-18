@@ -2,9 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 import os
 import sys
 
-
 from .forms import *
-
 
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 
@@ -13,15 +11,14 @@ from DataLogicLair.goods_repository import *
 from DataLogicLair.products_repository import *
 from DataLogicLair.Models.product_input_model import *
 
-
 from django.views.decorators.http import require_POST
 from .models import GoodModel
 
 from .cart import Cart
 from .forms import CartAddGoodForm
 
-
 product_repo = Product_repository()
+
 
 def index(request):
     return render(request, 'main/index.html')
@@ -86,7 +83,8 @@ def admin_panel(request):
                     errors[i] = 'Error'
                 print(i, type(i))
             print(errors)
-            pr = Product(values.get('name'), values.get('amount'), values.get('cost_per_amount'), values.get('unit_of_measurement'))
+            pr = Product(values.get('name'), values.get('amount'), values.get('cost_per_amount'),
+                         values.get('unit_of_measurement'))
             print(pr)
             # product_repo.create_product(pr)
             # print(type(pr_rep.create_product(pr)[0]))
@@ -123,6 +121,10 @@ def cart_remove(request, good_id):
             good = item
     cart.remove(good)
     return redirect('cart_detail')
+
+
+def products(request):
+    return render(request, 'main/products.html', {'products': Product_repository().get_all_products()})
 
 
 def cart_detail(request):

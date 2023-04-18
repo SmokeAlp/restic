@@ -6,6 +6,7 @@ urlpatterns = [
     path('catalog', views.catalog, name='catalog'),
     path('about', views.about, name='about'),
     path('admin_panel', views.admin_panel, name='admin_panel'),
+    path('products', views.products, name='products'),
     re_path('detail', views.cart_detail, name='cart_detail'),
     re_path(r'^add/(?P<good_id>\d+)/$', views.cart_add, name='cart_add'),
     re_path(r'^remove/(?P<good_id>\d+)/$', views.cart_remove, name='cart_remove'),

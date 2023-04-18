@@ -1,22 +1,19 @@
 import datetime
-
-
-from django import forms
 import os
 import sys
+
+from django import forms
 
 from .models import ProductModel
 
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 
 from DataLogicLair.products_repository import *
-from DataLogicLair.goods_repository import *
 
 GOOD_AMOUNT_CHOICES = [(i, str(i)) for i in range(1, 21)]
 
 
 class CartAddGoodForm(forms.Form):
-    name = forms.CharField(max_length=100)
     amount = forms.IntegerField(min_value=1, max_value=10)
     update = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
 

@@ -17,7 +17,6 @@ class Cart(object):
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
-
     def add(self, good, amount=1, update_amount=False):
         """
         Добавить продукт в корзину или обновить его количество.
@@ -31,13 +30,11 @@ class Cart(object):
             self.cart[good_id]['amount'] += amount
         self.save()
 
-
     def save(self):
         # Обновление сессии cart
         self.session[settings.CART_SESSION_ID] = self.cart
         # Отметить сеанс как "измененный", чтобы убедиться, что он сохранен
         self.session.modified = True
-
 
     def remove(self, good):
         """
@@ -47,7 +44,6 @@ class Cart(object):
         if good_id in self.cart:
             del self.cart[good_id]
             self.save()
-
 
     def __iter__(self):
         """
@@ -69,14 +65,12 @@ class Cart(object):
             item['total_cost'] = item['cost'] * item['amount']
             yield item
 
-
     def get_total_price(self):
         """
         Подсчет стоимости товаров в корзине.
         """
         return sum(Decimal(item['cost']) * item['amount'] for item in
                    self.cart.values())
-
 
     def clear(self):
         # удаление корзины из сессии

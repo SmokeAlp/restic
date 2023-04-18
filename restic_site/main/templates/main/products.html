@@ -16,7 +16,9 @@
             <img class="good_image" src="">
             <p class="good_info good_name">{{ product.1 }}</p>
             <p class="good_info">{{ product.2 }} {{product.3}}</p>
-<!--            <button class="good_info add_btn" {%if not good.1%} disabled {% endif %} type="submit">В корзину</button>-->
+            <a href="{% url 'edit_product' product.0 %}">
+                <button class="good_info add_btn" type="submit">Редактировать</button>
+            </a>
         </div>
     {% endfor %}
     </div>

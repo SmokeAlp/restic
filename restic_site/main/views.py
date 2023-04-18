@@ -127,6 +127,11 @@ def products(request):
     return render(request, 'main/products.html', {'products': Product_repository().get_all_products()})
 
 
+def editProducts(request, product_id):
+    print(product_id)
+    return render(request, 'main/edit_product.html', {'form': ProductForm()})
+
+
 def cart_detail(request):
     cart = Cart(request)
     return render(request, 'cart/detail.html', {'cart': cart})

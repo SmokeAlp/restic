@@ -1,3 +1,5 @@
+import time
+
 from django.shortcuts import render, redirect
 
 import os
@@ -23,7 +25,6 @@ product_repo = Product_repository()
 
 def index(request):
     return render(request, 'main/index.html')
-
 
 def catalog(request):
     db_goods = Goods_repository()

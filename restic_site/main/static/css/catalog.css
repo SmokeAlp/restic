@@ -11,7 +11,7 @@
 
 .good {
     margin: 50px 20px 0px 20px;
-    background-color: rgb(255,214,179);
+    background-color: #E2BD43;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,6 +46,6 @@
     width: 200px;
     border-radius: 15px;
     border: solid;
-    background-color: rgb(255,166,90);
+    background-color: #67712D;
     border-color: rgb(204,133,71);
 }

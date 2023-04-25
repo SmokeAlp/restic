@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
 
-
-body {
-
+html, body{
+margin: 0;
+background-color: #C3CB6D;
+padding: 0;
 }
 
 .up_title  {
-    background-color: rgb(255,214,179);
+    background-color: #EA9037;
     display: flex;
     flex-direction: row;
     align-items: center;

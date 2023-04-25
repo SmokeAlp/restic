@@ -104,8 +104,6 @@ class Goods_repository:
                     needProducts[i] += cursor.execute(self.__options.get_product_amount_by_id + f' {i}').fetchval()
                 else:
                     needProducts[i] = cursor.execute(self.__options.get_product_amount_by_id + f' {i}').fetchval()
-            for
-        else:
 
     def get_needed_products_amount_and_id_for_good_by_good_id(self, good_id):
         cnc = get_connection()

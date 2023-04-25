@@ -63,7 +63,7 @@ class Cart(object):
             item['total_cost'] = item['cost'] * item['amount']
             yield item
 
-    def get_total_price(self):
+    def get_total_cost(self):
         """
         Подсчет стоимости товаров в корзине.
         """

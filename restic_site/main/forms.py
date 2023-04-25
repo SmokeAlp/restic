@@ -16,7 +16,6 @@ from DataLogicLair.products_repository import *
 
 
 class CartAddGoodForm(forms.Form):
-    name = forms.CharField(max_length=100)
     amount = forms.IntegerField(min_value=1)
     update = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
 

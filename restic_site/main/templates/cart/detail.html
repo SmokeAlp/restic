@@ -1,36 +1,33 @@
 {% extends 'main/base.html' %}
 {% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}" />
+{% endblock %}
+
 {% block title %}
     Your shopping cart
 {% endblock %}
 {% block content %}
-    <h1>Your shopping cart</h1>
+    <h1 class="title">Your shopping cart</h1>
     <table class="cart">
         <thead>
         <tr>
-            <th>Image</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Remove</th>
-            <th>Unit price</th>
-            <th>Price</th>
+            <th class="table_up">Image</th>
+            <th class="table_up">Product</th>
+            <th class="table_up">Amount</th>
+            <th class="table_up">Remove</th>
+            <th class="table_up">Unit price</th>
+            <th class="table_up">Price</th>
         </tr>
         </thead>
         <tbody>
         {% for item in cart %}
             {% with good=item.good %}
                 <tr>
-                    <td>
-                        <a href="{{ good.get_absolute_url }}">
-                            <img src="
-                                {% if good.image %}
-                                    {{ good.image.url }}
-                                {% endif %}">
-                        </a>
-                    </td>
+                    <td><img class="pr_img" src="static/images/{{ good.name }}.jpg"></td>
                     <td>{{ good.name }}</td>
                     <td>{{ item.amount }}</td>
-                    <td>{{ item }}</td>
                     <td><a href="{% url 'cart_remove' good.id%}">Remove</a></td>
                     <td class="num">${{ item.cost }}</td>
                     <td class="num">${{ item.total_cost }}</td>
@@ -44,7 +41,4 @@
         </tr>
         </tbody>
     </table>
-    <p class="text-right">
-        <a href="#" class="button">Checkout</a>
-    </p>
 {% endblock %}

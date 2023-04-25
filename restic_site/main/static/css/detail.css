@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+.pr_img {
+    height: 60px;
+    width: 60px;
+}
+
+.table_up {
+    font-size: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    padding: 0px 20px 0px 20px;
+}
+
+.title {
+    margin: 20px 0px 20px 30px;
+    font-size: 40px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-style: italic;
+    font-weight: 600;
+}

@@ -1,8 +1,6 @@
 import timeit
 from pyodbc import Error
 from DataLogicLair.goods_repository import *
-from DataLogicLair.Models.good_model_for_order import get_needed_products_amount_and_id_for_good_by_good_id
-from DataLogicLair.canAddProductToCart import ordersInCart
 from DataLogicLair.get_conection import get_connection
 from DataLogicLair.options import Options
 from DataLogicLair.orders_repository import Order_repository
@@ -54,3 +52,5 @@ order = Order_repository()
 
 for i in order.get_all_orders():
     print(type(i.isDel))
+
+    

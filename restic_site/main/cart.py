@@ -1,6 +1,5 @@
 from decimal import Decimal
 from django.conf import settings
-from .models import GoodModel
 from DataLogicLair.goods_repository import *
 
 
@@ -15,8 +14,8 @@ class Cart(object):
         if not cart:
             # save an empty cart in the session
             cart = self.session[settings.CART_SESSION_ID] = {}
+            print('bbee')
         self.cart = cart
-
 
     def add(self, good, amount=1, update_amount=False):
         """
@@ -31,13 +30,11 @@ class Cart(object):
             self.cart[good_id]['amount'] += amount
         self.save()
 
-
     def save(self):
         # Обновление сессии cart
         self.session[settings.CART_SESSION_ID] = self.cart
         # Отметить сеанс как "измененный", чтобы убедиться, что он сохранен
         self.session.modified = True
-
 
     def remove(self, good):
         """
@@ -48,13 +45,12 @@ class Cart(object):
             del self.cart[good_id]
             self.save()
 
-
     def __iter__(self):
         """
-        Перебор элементов в корзине и получение продуктов из базы данных.
+        Перебор элементов в корзине и получение товаров из базы данных.
         """
         good_ids = self.cart.keys()
-        # получение объектов product и добавление их в корзину
+        # получение объектов good и добавление их в корзину
         goodes = Goods_repository().get_all_goods()
         goods = []
         for item in goodes:
@@ -62,13 +58,10 @@ class Cart(object):
                 goods.append(item)
         for good in goods:
             self.cart[str(good.id)]['good'] = good
-        print(self.cart)
-
         for item in self.cart.values():
             item['cost'] = Decimal(item['cost'])
             item['total_cost'] = item['cost'] * item['amount']
             yield item
-
 
     def get_total_price(self):
         """
@@ -76,7 +69,6 @@ class Cart(object):
         """
         return sum(Decimal(item['cost']) * item['amount'] for item in
                    self.cart.values())
-
 
     def clear(self):
         # удаление корзины из сессии

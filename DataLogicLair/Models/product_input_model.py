@@ -1,7 +1,3 @@
-from DataLogicLair.get_conection import *
-from DataLogicLair.options import *
-
-
 class Product:
     def __init__(self, name=str, amount=int, cost_per_amount=int, unit_of_measurement=str):
         self.name = name

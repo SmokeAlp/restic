@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
+
 import os
 import sys
 
@@ -12,7 +13,7 @@ from DataLogicLair.products_repository import *
 from DataLogicLair.Models.product_input_model import *
 
 from django.views.decorators.http import require_POST
-from .models import GoodModel
+
 
 from .cart import Cart
 from .forms import CartAddGoodForm
@@ -24,16 +25,15 @@ def index(request):
     return render(request, 'main/index.html')
 
 
-# def cart(request):
-#     data = {
-#         'orders_list': ordersInCart,
-#         'goods_list': "bbebebebe",
-#     }
-#     return render(request, 'main/cart.html', data)
-
-
 def catalog(request):
     db_goods = Goods_repository()
+    goods_in_cart = []
+    cart = Cart(request)
+    for i in cart:
+        print(i.get('good'), i.get('amount'))
+        goods_in_cart.append([i.get('good'),i.get('amount')])
+    print(goods_in_cart)
+    goods = db_goods.get_all_goods_catalog(goods_in_cart)
     if request.POST:
         form = CartAddGoodForm(request.POST)
         if form.is_valid():
@@ -46,7 +46,7 @@ def catalog(request):
         form = CartAddGoodForm()
     data = {
         # проверка
-        'goods_list': db_goods.get_all_goods_cart(),
+        'goods_list': goods,
         'form': form,
     }
     return render(request, 'cart/catalog.html', data)
@@ -66,7 +66,6 @@ def about(request):
 
 
 def admin_panel(request):
-    errors = {}
     if request.method == 'POST':
         form = CreateProductForm(request.POST)
         if form.is_valid():
@@ -76,13 +75,6 @@ def admin_panel(request):
                 'cost_per_amount': form.cleaned_data.get('cost_per_amount'),
                 'unit_of_measurement': form.cleaned_data.get('unit_of_measurement')
             }
-            for i in values.values():
-                try:
-                    beb = int(i)
-                except:
-                    errors[i] = 'Error'
-                print(i, type(i))
-            print(errors)
             pr = Product(values.get('name'), values.get('amount'), values.get('cost_per_amount'),
                          values.get('unit_of_measurement'))
             print(pr)
@@ -97,6 +89,7 @@ def admin_panel(request):
 def cart_add(request, good_id):
     goods_rep = Goods_repository()
     goods = goods_rep.get_all_goods()
+    goods_in_cart = []
     cart = Cart(request)
     good = None
     for item in goods:
@@ -105,6 +98,9 @@ def cart_add(request, good_id):
     form = CartAddGoodForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
+        for i in cart:
+            goods_in_cart.append([i.get('good'), i.get('amount')])
+        goods_rep.check_add_good_in_cart_button(good, goods_in_cart)
         cart.add(good=good,
                  amount=cd['amount'],
                  update_amount=cd['update'])
@@ -123,6 +119,11 @@ def cart_remove(request, good_id):
     return redirect('cart_detail')
 
 
+def cart_detail(request):
+    cart = Cart(request)
+    return render(request, 'cart/detail.html', {'cart': cart})
+
+
 def products(request):
     return render(request, 'main/products.html', {'products': Product_repository().get_all_products()})
 
@@ -130,8 +131,3 @@ def products(request):
 def editProducts(request, product_id):
     print(product_id)
     return render(request, 'main/edit_product.html', {'form': ProductForm()})
-
-
-def cart_detail(request):
-    cart = Cart(request)
-    return render(request, 'cart/detail.html', {'cart': cart})

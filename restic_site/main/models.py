@@ -11,7 +11,4 @@ class ProductModel(models.Model):
         return self.name
 
 
-class GoodModel(models.Model):
-    name = models.CharField(max_length=50, null=False)
-    amount = models.IntegerField(null=False)
-    cost = models.IntegerField(null=False)
+

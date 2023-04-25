@@ -1,4 +1,4 @@
-from DataLogicLair.Models.good_model_for_order import *
+from DataLogicLair.Models.good_input_model import *
 from DataLogicLair.Models.good_input_model import *
 from DataLogicLair.Models.product_input_model import *
 
@@ -177,7 +177,7 @@ order = Order_repository()
 # # создаю продукты
 from pyodbc import Row
 
-from DataLogicLair.Models.good_model_for_order import Good_for_order
+
 
 # cnc = get_connection()
 # cursor = cnc.cursor()

@@ -16,7 +16,7 @@
         <div class="good">
             <form class="good" action="{% url 'cart_add' good.0.id%}" method="post">
             {% csrf_token %}
-            <img class="good_image" src="{{ good.0.images }}" alt="{{good.0.name}}">
+            <img class="good_image" src="static/images/{{ good.0.images}}" alt="{{good.0.name}}"/>
             <p class="good_info good_name">Наименование: {{ good.0.name }}</p>
             <p class="good_info">Цена: {{ good.0.cost }}</p>
             {{form.as_p}}

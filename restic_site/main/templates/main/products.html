@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/catalog.css' %}" />
+{% endblock %}
+
+{% block title %}
+    Продукты
+{% endblock %}
+
+{% block content %}
+    <div class="goods">
+    {% for product in products %}
+        <div class="good">
+            <img class="good_image" src="" alt="{{ product.name }}">
+            <p class="good_info good_name">{{ product.name }}</p>
+            <p class="good_info">{{ product.amount }} {{product.unit_of_measurement }}</p>
+            <a href="{% url 'edit_product' product.id %}">
+                <button class="good_info add_btn" type="submit">Редактировать</button>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

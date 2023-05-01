@@ -132,3 +132,9 @@ def products(request):
 def editProducts(request, product_id):
     print(product_id)
     return render(request, 'main/edit_product.html', {'form': ProductForm()})
+
+
+def cart_clear(request):
+    cart = Cart(request)
+    cart.clear()
+    return redirect('cart_detail')

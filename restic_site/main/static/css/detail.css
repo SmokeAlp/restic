@@ -2,8 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 
 .pr_img {
-    height: 60px;
-    width: 60px;
+    height: 80px;
+    width: 80px;
+    margin: 10px 0px 10px 25px;
+    border-radius: 30px;
 }
 
 .table_up {
@@ -17,6 +19,37 @@
 .title {
     margin: 20px 0px 20px 30px;
     font-size: 40px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.num {
+    font-size: 24px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    padding: 0px 20px 0px 20px;
+}
+
+.good_info {
+    font-size: 24px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    padding: 0px 20px 0px 20px;
+}
+
+.confirm_btn{
+    margin: 10px 10px 15px 40px;
+    height: 50px;
+    width: 250px;
+    border-radius: 15px;
+    border: solid;
+    background-color: #67712D;
+    border-color: rgb(204,133,71);
+
+    font-size: 20px;
     font-family: 'Josefin Sans', sans-serif;
     font-style: italic;
     font-weight: 600;

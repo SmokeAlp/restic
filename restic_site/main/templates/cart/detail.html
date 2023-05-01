@@ -16,9 +16,9 @@
             <th class="table_up">Image</th>
             <th class="table_up">Product</th>
             <th class="table_up">Amount</th>
-            <th class="table_up">Remove</th>
             <th class="table_up">Unit price</th>
             <th class="table_up">Price</th>
+            <th class="table_up">Remove</th>
         </tr>
         </thead>
         <tbody>
@@ -26,19 +26,20 @@
             {% with good=item.good %}
                 <tr>
                     <td><img class="pr_img" src="static/images/{{ good.name }}.jpg"></td>
-                    <td>{{ good.name }}</td>
-                    <td>{{ item.amount }}</td>
-                    <td><a href="{% url 'cart_remove' good.id%}">Remove</a></td>
+                    <td class="good_info">{{ good.name }}</td>
+                    <td class="num">{{ item.amount }}</td>
                     <td class="num">${{ item.cost }}</td>
                     <td class="num">${{ item.total_cost }}</td>
+                    <td><a href="{% url 'cart_remove' good.id%}" class="good_info">Remove</a></td>
                 </tr>
             {% endwith %}
         {% endfor %}
         <tr class="total">
-            <td>Total</td>
+            <td class="good_info">Total</td>
             <td colspan="4"></td>
             <td class="num">${{ cart.get_total_cost }}</td>
         </tr>
         </tbody>
     </table>
+    <button class="confirm_btn" onclick="location.href='{% url 'cart_clear' %}'">Подтвердить заказ</button>
 {% endblock %}

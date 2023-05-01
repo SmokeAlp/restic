@@ -16,15 +16,18 @@ from DataLogicLair.Models.product_input_model import *
 
 from django.views.decorators.http import require_POST
 
-
 from .cart import Cart
 from .forms import CartAddGoodForm
 
 product_repo = Product_repository()
+cnc = get_connection()
+cursor = cnc.cursor()
+opt = Options()
 
 
 def index(request):
     return render(request, 'main/index.html')
+
 
 def catalog(request):
     db_goods = Goods_repository()
@@ -32,7 +35,7 @@ def catalog(request):
     cart = Cart(request)
     for i in cart:
         print(i.get('good'), i.get('amount'))
-        goods_in_cart.append([i.get('good'),i.get('amount')])
+        goods_in_cart.append([i.get('good'), i.get('amount')])
     print(goods_in_cart)
     goods = db_goods.get_all_goods_catalog(goods_in_cart)
     if request.POST:
@@ -129,12 +132,36 @@ def products(request):
     return render(request, 'main/products.html', {'products': Product_repository().get_all_products()})
 
 
-def editProducts(request, product_id):
-    print(product_id)
-    return render(request, 'main/edit_product.html', {'form': ProductForm()})
-
+def edit_products(request, product_id):
+    is_changed = 'продукт не изменен'  # для красоты, показывает изменен ли продукт с момента последнего входа
+    last_edit_data = None  # показывает прошлые введенные данные с момента последнего изменения
+    form = EditProductForm()
+    product_info = cursor.execute(opt.get_product_by_id + f' {product_id}').fetchall()[0]
+    # for i in cursor.columns(table='products'):
+    #     print(i.column_name)
+    if request.method == 'POST':
+        form = EditProductForm(request.POST)
+        if form.is_valid():
+            # сначала присваиваю неизмененные данные о продукте в last_edit_data
+            last_edit_data = dict(zip(product_info.cursor_description, product_info))
+            # print(last_edit_data)
+            # затем меняю в бд
+            product = Product(**form.cleaned_data)
+            do_edit = product_repo.edit_product(product_id, product)
+            if not do_edit:
+                form.errors['error'] = 'нельзя отрицательное число'
+            else:
+                is_changed = 'продукт изменён'
+            # print(form.cleaned_data)
+    form.fields['name'].widget.attrs['value'] = product_info.name
+    form.fields['amount'].widget.attrs['value'] = product_info.amount
+    form.fields['cost_per_amount'].widget.attrs['value'] = product_info.cost_per_amount
+    form.fields['unit_of_measurement'].initial = product_info.unit_of_measurement
+    return render(request, 'main/edit_product.html',
+                  {'form': form, 'is_changed': is_changed, 'last_edit_data': last_edit_data, 'product_id': product_id})
 
 def cart_clear(request):
     cart = Cart(request)
     cart.clear()
     return redirect('cart_detail')
+

@@ -55,10 +55,29 @@ class Product_repository:
                 return
             else:
                 cursor.execute(self.__options.delete_product + f" {product_id}")
+                cursor.commit()
+                cursor.close()
                 print('product have been deleted successfully')
                 return True
         except Error as err:
             print(f'delete product error: {err}')
+
+    def edit_product(self, product_id, product):
+        try:
+            cnc = get_connection()
+            cursor = cnc.cursor()
+            if product.amount < 0 or product.cost_per_amount < 0:
+                return False
+            cursor.execute(self.__options.update_product + f" {product_id},"
+                                                           f"'{product.name}',"
+                                                           f"{product.amount},"
+                                                           f"{product.cost_per_amount},"
+                                                           f"'{product.unit_of_measurement}'")
+            cursor.commit()
+            cursor.close()
+            return True
+        except Error as err:
+            print(f'edit product error: {err}')
 
     def get_all_products(self):
         cnc = get_connection()

@@ -60,11 +60,13 @@ class CreateProductForm(forms.ModelForm):
         return data
 
 
-class ProductForm(forms.Form):
+class EditProductForm(forms.Form):
     name = forms.CharField()
-    amount = forms.FloatField()
+    amount = forms.IntegerField()
+    cost_per_amount = forms.IntegerField()
     choices = set([(i.unit_of_measurement, i.unit_of_measurement) for i in Product_repository().get_all_products()])
-    EdIzm = forms.ChoiceField(choices=choices)
+    unit_of_measurement = forms.ChoiceField(choices=choices)
+
 
 
 products = Product_repository()

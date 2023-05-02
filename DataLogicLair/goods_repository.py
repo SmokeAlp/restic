@@ -81,30 +81,25 @@ class Goods_repository:
                 goodsR.append([good, ok])
         return goodsR
 
-    def check_add_good_in_cart_button(self, good, goods_in_cart):
+    def check_add_good_in_cart_button(self, good, goods_in_cart, amount):
         cnc = get_connection()
         cursor = cnc.cursor()
+        # получаю нужные продукты для товара
         cursor.execute(self.__options.get_needed_products_amount_and_id_for_good_by_good_id + f" {good.id}")
         dta = cursor.fetchall()
-        product_ids = list(map(lambda x: x[0], dta))
-        g = set
+        # получаю их id
+        products_id = list(map(lambda x: x[0], dta))
+        # получаю их нужное кол-во
+        products_amount = list(map(lambda x: cursor.execute(self.__options.get_product_amount_by_id + f" {x}").fetchone() * amount, products_id))
+        # формирую словарь {id нужного продукта: его нужное кол-во }
+        need_products = dict.fromkeys(products_id, products_amount)
+        # прибавляю все продукты из корзины
         for good in goods_in_cart:
             for i in self.get_needed_products_amount_and_id_for_good_by_good_id(good[0].id):
-                g.add(i)
-        if len(goods_in_cart) > 0:
-            needProducts = {}
-            for good in goods_in_cart:
-                for product in self.get_needed_products_amount_and_id_for_good_by_good_id(good[0].id):
-                    if product.id not in needProducts.keys() and product.id in product_ids:
-                        needProducts[product.id] = product.product_amount * good[1]
-                    elif product.id in needProducts.keys() and product.id in product_ids:
-                        needProducts[product.id] += product.product_amount * good[1]
-            for i in needProducts:
-                if i in needProducts.keys():
-                    needProducts[i] += cursor.execute(self.__options.get_product_amount_by_id + f' {i}').fetchval()
-                else:
-                    needProducts[i] = cursor.execute(self.__options.get_product_amount_by_id + f' {i}').fetchval()
+                if i in need_products.keys():
+                    need_products[i] += i.amount * good[1]
 
+        for product
     def get_needed_products_amount_and_id_for_good_by_good_id(self, good_id):
         cnc = get_connection()
         cursor = cnc.cursor()

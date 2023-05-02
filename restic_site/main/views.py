@@ -58,14 +58,14 @@ def catalog(request):
 
 def about(request):
     if request.method == 'POST':
-        form = ProductForm(request.POST)
+        form = TestForm(request.POST)
         if form.is_valid():
             data = form.data
             print(data)
         else:
             print(form.errors)
     else:
-        form = ProductForm()
+        form = TestForm()
     return render(request, 'main/about.html', {'form': form})
 
 
@@ -104,7 +104,7 @@ def cart_add(request, good_id):
         cd = form.cleaned_data
         for i in cart:
             goods_in_cart.append([i.get('good'), i.get('amount')])
-        goods_rep.check_add_good_in_cart_button(good, goods_in_cart)
+        goods_rep.check_add_good_in_cart_button(good, goods_in_cart, cd['amount'])
         cart.add(good=good,
                  amount=cd['amount'],
                  update_amount=cd['update'])

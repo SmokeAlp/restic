@@ -81,25 +81,29 @@ class Goods_repository:
                 goodsR.append([good, ok])
         return goodsR
 
-    def check_add_good_in_cart_button(self, good, goods_in_cart, amount):
+    def check_add_good_in_cart_button(self, good, goods_in_cart, good_amount):
+        # все данные получаются из cart_add
         cnc = get_connection()
         cursor = cnc.cursor()
         # получаю нужные продукты для товара
         cursor.execute(self.__options.get_needed_products_amount_and_id_for_good_by_good_id + f" {good.id}")
         dta = cursor.fetchall()
-        # получаю их id
-        products_id = list(map(lambda x: x[0], dta))
-        # получаю их нужное кол-во
-        products_amount = list(map(lambda x: cursor.execute(self.__options.get_product_amount_by_id + f" {x}").fetchone() * amount, products_id))
         # формирую словарь {id нужного продукта: его нужное кол-во }
-        need_products = dict.fromkeys(products_id, products_amount)
+        need_products = dict(zip([id[0] for id in dta], [nd_amnt[1]*good_amount for nd_amnt in dta]))
+        print(need_products)
         # прибавляю все продукты из корзины
         for good in goods_in_cart:
             for i in self.get_needed_products_amount_and_id_for_good_by_good_id(good[0].id):
-                if i in need_products.keys():
-                    need_products[i] += i.amount * good[1]
+                if i.id in need_products.keys():
+                    need_products[i.id] += i.product_amount * good[1]
+        for product in need_products.items():
+            cursor.execute(self.__options.get_product_amount_by_id + f" {product[0]}")
+            product_amount_in_stock = cursor.fetchval()
+            print(need_products, product_amount_in_stock)
+            if product[1] > product_amount_in_stock:
+                return False
+        return True
 
-        for product
     def get_needed_products_amount_and_id_for_good_by_good_id(self, good_id):
         cnc = get_connection()
         cursor = cnc.cursor()

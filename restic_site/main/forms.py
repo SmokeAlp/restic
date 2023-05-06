@@ -1,6 +1,4 @@
 import datetime
-
-from django import forms
 from django.core.exceptions import ValidationError
 
 import os
@@ -9,17 +7,14 @@ import sys
 from django import forms
 
 from .models import ProductModel
+from DataLogicLair.products_repository import *
 
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
-
-from DataLogicLair.products_repository import *
 
 
 class CartAddGoodForm(forms.Form):
     amount = forms.IntegerField(min_value=1)
     update = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
-
-
 
 
 class CreateProductForm(forms.ModelForm):
@@ -32,7 +27,7 @@ class CreateProductForm(forms.ModelForm):
             'cost_per_amount': forms.NumberInput(
                 attrs={'class': 'form-control input-lg', 'placeholder': 'цена за единицу продукта'}),
             'unit_of_measurement': forms.TextInput(
-                attrs={'class': 'form-control input-lg', 'placeholder': 'единица измер продукта'})
+                attrs={'class': 'form-control input-lg', 'placeholder': 'единица измерения продукта'})
         }
 
     def clean_name(self):
@@ -56,7 +51,7 @@ class CreateProductForm(forms.ModelForm):
         except:
             beb = False
         if beb:
-            raise ValidationError('единиц измер не число')
+            raise ValidationError('единиц измерения не число')
         return data
 
 
@@ -66,7 +61,6 @@ class EditProductForm(forms.Form):
     cost_per_amount = forms.IntegerField()
     choices = set([(i.unit_of_measurement, i.unit_of_measurement) for i in Product_repository().get_all_products()])
     unit_of_measurement = forms.ChoiceField(choices=choices)
-
 
 
 products = Product_repository()

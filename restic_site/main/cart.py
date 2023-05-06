@@ -14,7 +14,6 @@ class Cart(object):
         if not cart:
             # save an empty cart in the session
             cart = self.session[settings.CART_SESSION_ID] = {}
-            print('bbee')
         self.cart = cart
 
     def add(self, good, amount=1, update_amount=False):
@@ -59,8 +58,8 @@ class Cart(object):
         for good in goods:
             self.cart[str(good.id)]['good'] = good
         for item in self.cart.values():
-            item['cost'] = Decimal(item['cost'])
-            item['total_cost'] = item['cost'] * item['amount']
+            item['cost'] = str(Decimal(item['cost']))
+            item['total_cost'] = str(Decimal(item['cost']) * item['amount'])
             yield item
 
     def get_total_cost(self):

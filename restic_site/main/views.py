@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from .forms import *
+
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from DataLogicLair.goods_repository import *
 from DataLogicLair.products_repository import *
 from DataLogicLair.Models.product_input_model import *
 from django.views.decorators.http import require_POST
 from .cart import Cart
 from .forms import CartAddGoodForm
-
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
 
 product_repo = Product_repository()
 cnc = get_connection()

@@ -3,13 +3,13 @@ from django.core.exceptions import ValidationError
 
 import os
 import sys
-
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from django import forms
 
 from .models import ProductModel
 from DataLogicLair.products_repository import *
 
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
+
 
 
 class CartAddGoodForm(forms.Form):

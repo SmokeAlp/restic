@@ -21,13 +21,17 @@ class Cart(object):
         Добавить продукт в корзину или обновить его количество.
         """
         good_id = str(good.id)
+        print(good)
         if good_id not in self.cart:
             self.cart[good_id] = {'amount': 0, 'cost': str(good.cost)}
         if update_amount:
             self.cart[good_id]['amount'] = amount
         else:
             self.cart[good_id]['amount'] += amount
+        print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
         self.save()
+        print(self.cart)
+        print('AAAAAAAAAAAAAAAAAAAAAAAAAAA')
 
     def save(self):
         # Обновление сессии cart
@@ -48,10 +52,12 @@ class Cart(object):
         """
         Перебор элементов в корзине и получение товаров из базы данных.
         """
+        print('IterPPPPPPPPPPPPPPPPPPPP')
         good_ids = self.cart.keys()
         # получение объектов good и добавление их в корзину
         goodes = Goods_repository().get_all_goods()
         goods = []
+        print("ITTTER_ITTTTTTTTTER")
         for item in goodes:
             if str(item.id) in good_ids:
                 goods.append(item)

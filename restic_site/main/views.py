@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import *
-
+import json
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from DataLogicLair.goods_repository import *
 from DataLogicLair.products_repository import *
@@ -73,6 +73,17 @@ def cart_add(request, good_id):
             form.errors['error'] = 'не хватает продуктов'
             print('bebbe')
             return redirect('cart_detail')
+        print('AAAAAAAAAAAAAAAAAAAAAAAAAAAR')
+        print(request.session['cart'])
+    for i in cart:
+        print('JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJOOOOOOOOOOOOOO')
+        print(i)
+        print(i['good'])
+        i['good'] = tuple(i['good'])
+        cart.save()
+        print(i)
+        print(i['good'], type(i['good']))
+    print(type(cart.cart['1'].get('good')))
     return redirect('cart_detail')
 
 
@@ -95,7 +106,11 @@ def cart_clear(request):
 
 
 def cart_detail(request):
+    print('BBBBBBBBBBBBBBBBBBBBB')
     cart = Cart(request)
+    print(type(cart.cart['1']['good']))
+    print(cart.cart)
+    print('CCCCCCCCCCCCCCCCCCCCCCCCCC')
     return render(request, 'cart/detail.html', {'cart': cart})
 
 

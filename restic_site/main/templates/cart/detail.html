@@ -34,6 +34,18 @@
                 </tr>
             {% endwith %}
         {% endfor %}
+        {% for item in cart %}
+            {% with good=item.good %}
+                <tr>
+                    <td><img class="pr_img" src="static/images/{{ good.name }}.jpg"></td>
+                    <td class="good_info">{{ good.name }}</td>
+                    <td class="num">{{ item.amount }}</td>
+                    <td class="num">${{ item.cost }}</td>
+                    <td class="num">${{ item.total_cost }}</td>
+                    <td><a href="{% url 'cart_remove' good.id%}" class="good_info">Remove</a></td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
         <tr class="total">
             <td class="good_info">Total</td>
             <td colspan="4"></td>

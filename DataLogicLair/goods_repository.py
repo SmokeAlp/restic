@@ -104,6 +104,24 @@ class Goods_repository:
                 return False
         return True
 
+    def check_cart_confirm(self, goods_in_cart):
+        cnc = get_connection()
+        cursor = cnc.cursor()
+        need_products = {}
+        for good in goods_in_cart:
+            for i in self.get_needed_products_amount_and_id_for_good_by_good_id(good['good'].id):
+                if i.id in need_products.keys():
+                    need_products[i.id] += i.product_amount * good['amount']
+                else:
+                    need_products[i.id] = i.product_amount * good['amount']
+        for product in need_products.items():
+            cursor.execute(self.__options.get_product_amount_by_id + f" {product[0]}")
+            product_amount_in_stock = cursor.fetchval()
+            print(need_products, product_amount_in_stock)
+            if product[1] > product_amount_in_stock:
+                return False
+        return True
+
     def get_needed_products_amount_and_id_for_good_by_good_id(self, good_id):
         cnc = get_connection()
         cursor = cnc.cursor()

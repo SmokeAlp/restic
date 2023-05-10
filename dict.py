@@ -17,6 +17,7 @@ for n in range(len(l)):
     l.pop(n)
 people = {"user_1": person_1, "user_2": person_2}
 print(person_1.get("имя"))
+print(person_1.keys())
 #
 # for user_number, user_info in people.items():
 #     print(f"User: {user_number}")

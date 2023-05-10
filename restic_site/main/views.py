@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import *
 import json
+
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from DataLogicLair.goods_repository import *
 from DataLogicLair.products_repository import *
@@ -10,6 +11,7 @@ from .cart import Cart
 from .forms import CartAddGoodForm
 
 product_repo = Product_repository()
+goods_rep = Goods_repository()
 cnc = get_connection()
 cursor = cnc.cursor()
 opt = Options()
@@ -32,7 +34,7 @@ def about(request):
     return render(request, 'main/about.html', {'form': form})
 
 
-def catalog(request):
+def catalog(request, beb=None):
     db_goods = Goods_repository()
     goods_in_cart = []
     cart = Cart(request)
@@ -42,9 +44,17 @@ def catalog(request):
     # print(goods_in_cart)
     goods = db_goods.get_all_goods_catalog(goods_in_cart)
     form = CartAddGoodForm()
+    print(form.fields['amount'].max_value)
+    if beb:
+        beb = int(beb)
+        form.errors[beb] = 'недостаточно продуктов'
+        error = list(form.errors.items())[0][1]
+    else:
+        error = None
     data = {
         'goods_list': goods,
         'form': form,
+        'error': error
     }
     return render(request, 'cart/catalog.html', data)
 
@@ -70,21 +80,25 @@ def cart_add(request, good_id):
                      amount=cd['amount'],
                      update_amount=cd['update'])
         else:
-            form.errors['error'] = 'не хватает продуктов'
-            print('bebbe')
-            return redirect('cart_detail')
-        print('AAAAAAAAAAAAAAAAAAAAAAAAAAAR')
-        print(request.session['cart'])
+            return redirect(catalog, good_id)
     for i in cart:
-        print('JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJOOOOOOOOOOOOOO')
-        print(i)
-        print(i['good'])
         i['good'] = tuple(i['good'])
         cart.save()
-        print(i)
-        print(i['good'], type(i['good']))
-    print(type(cart.cart['1'].get('good')))
     return redirect('cart_detail')
+
+
+def cart_confirm(request):
+    cart = Cart(request)
+    for i in cart:
+        print(i)
+    goods_in_cart = list(map(lambda x: x, cart))
+    print(goods_in_cart)
+    error = None
+    if not goods_rep.check_cart_confirm(goods_in_cart):
+        error = 1
+    else:
+        pass
+    return redirect(cart_detail, error)
 
 
 def cart_remove(request, good_id):
@@ -105,13 +119,12 @@ def cart_clear(request):
     return redirect('cart_detail')
 
 
-def cart_detail(request):
-    print('BBBBBBBBBBBBBBBBBBBBB')
+def cart_detail(request, err=None):
     cart = Cart(request)
-    print(type(cart.cart['1']['good']))
-    print(cart.cart)
-    print('CCCCCCCCCCCCCCCCCCCCCCCCCC')
-    return render(request, 'cart/detail.html', {'cart': cart})
+    error = None
+    if err:
+        error = 'произошла ошибка при заказе'
+    return render(request, 'cart/detail.html', {'cart': cart, 'confirm_error': error})
 
 
 def admin_panel(request):

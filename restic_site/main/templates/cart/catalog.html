@@ -14,12 +14,16 @@
     <div class="goods">
     {% for good in goods_list %}
         <div class="good">
-            <form class="good" action="{% url 'cart_add' good.0.id%}" method="post">
+            <form class="good" action="{% url 'cart_add' good.0.id %}" method="post">
             {% csrf_token %}
-            <img class="good_image" src="static/images/{{ good.0.images}}" alt="{{good.0.name}}"/>
+            <img class="good_image" src="../static/images/{{ good.0.images}}" alt="{{good.0.name}}"/>
             <p class="good_info good_name">Наименование: {{ good.0.name }}</p>
             <p class="good_info">Цена: {{ good.0.cost }}</p>
-            {{form.as_p}}
+            <p class="good_info good_name">{{ form.amount.label }}: {{ form.amount }}</p>
+            {{ form.update }}
+                {% if good.0.id in form.errors.keys %}
+                    {{ error }}
+                {% endif %}
             <button class="good_info add_btn" {%if not good.1%} disabled {% endif %} type="submit">В корзину</button>
             </form>
         </div>

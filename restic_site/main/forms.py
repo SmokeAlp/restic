@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 
 import os
 import sys
+
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from django import forms
 
@@ -10,10 +11,8 @@ from .models import ProductModel
 from DataLogicLair.products_repository import *
 
 
-
-
 class CartAddGoodForm(forms.Form):
-    amount = forms.IntegerField(min_value=1)
+    amount = forms.IntegerField(min_value=0)
     update = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
 
 
